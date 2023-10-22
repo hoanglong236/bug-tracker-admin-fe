@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-verified-layout',
+  selector: 'verified-layout',
   templateUrl: './verified-layout.component.html',
-  styleUrls: ['./verified-layout.component.scss']
+  styleUrls: ['./verified-layout.component.scss'],
 })
-export class VerifiedLayoutComponent {
-
-}
+export class VerifiedLayoutComponent {}

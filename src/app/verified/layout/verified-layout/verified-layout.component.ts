@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./verified-layout.component.scss'],
 })
 export class VerifiedLayoutComponent {
-  protected toggleSideBar() {
+  protected toggleSideBar = () => {
     document.querySelector('#sideBar')?.classList.toggle('hidden');
-  }
+  };
 }

@@ -8,7 +8,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class HeaderComponent {
   @Output() toggleMenuEvent = new EventEmitter();
 
-  protected onMenuBtnClick() {
+  protected onMenuBtnClick = () => {
     this.toggleMenuEvent.emit();
-  }
+  };
 }

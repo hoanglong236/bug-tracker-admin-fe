@@ -57,4 +57,9 @@ export class AuthService {
     this.authStorageService.deleteAuthorizationToken();
     onResolve();
   }
+
+  isAuthenticated(): boolean {
+    const authToken = this.authStorageService.getAuthorizationToken();
+    return authToken ? true : false;
+  }
 }

@@ -14,8 +14,4 @@ export class SidebarComponent {
     document.querySelector('#submenu')?.classList.toggle('hidden');
     document.querySelector('#arrow')?.classList.toggle('rotate-180');
   }
-
-  protected openSidebar() {
-    document.querySelector('.sidebar')?.classList.toggle('hidden');
-  }
 }

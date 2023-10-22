@@ -1,0 +1,22 @@
+<div class="bg-gray-900 text-gray-200 shadow w-full p-2 flex items-center justify-between">
+  <div class="ml-3 flex items-center">
+    <div class="p-2.5 hidden md:flex items-center">
+      <span class="material-symbols-outlined p-1 rounded-md bg-blue-600">verified</span>
+      <h1 class="font-semibold text-gray-200 text-[15px] ml-3">BugTracker</h1>
+    </div>
+    <div class="md:hidden flex items-center">
+      <button (click)="onMenuBtnClick()" class="flex text-4xl left-4 cursor-pointer">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="flex space-x-5 mr-3">
+    <button class="inline-flex items-center">
+      <span class="material-symbols-outlined lg:text-3xl">notifications</span>
+    </button>
+    <button class="inline-flex items-center">
+      <span class="material-symbols-outlined lg:text-3xl">account_circle</span>
+    </button>
+  </div>
+</div>

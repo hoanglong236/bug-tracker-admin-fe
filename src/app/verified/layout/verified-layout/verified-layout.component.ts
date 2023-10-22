@@ -5,4 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './verified-layout.component.html',
   styleUrls: ['./verified-layout.component.scss'],
 })
-export class VerifiedLayoutComponent {}
+export class VerifiedLayoutComponent {
+  protected toggleSideBar() {
+    document.querySelector('#sideBar')?.classList.toggle('hidden');
+  }
+}

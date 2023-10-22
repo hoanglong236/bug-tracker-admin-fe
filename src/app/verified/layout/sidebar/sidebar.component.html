@@ -1,52 +1,40 @@
-<button class="absolute text-white text-4xl top-5 left-4 cursor-pointer" (click)="openSidebar()">
-  <span class="material-symbols-outlined p-3 bg-gray-900 rounded-md">menu</span>
-</button>
-<div class="sidebar fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900">
-  <div class="text-gray-100 text-xl">
-    <div class="p-2.5 mt-1 flex items-center">
-      <span class="material-symbols-outlined p-1 rounded-md bg-blue-600">verified</span>
-      <h1 class="font-semibold text-gray-200 text-[15px] ml-3">BugTracker</h1>
-      <button class="cursor-pointer ml-28 lg:hidden" (click)="openSidebar()">
-        <span class="material-symbols-outlined">close</span>
-      </button>
-    </div>
-    <div class="my-2 bg-gray-600 h-[1px]"></div>
+<div class="mb-3 bg-gray-600 h-[1px]"></div>
+<div class="p-2.5 mb-2 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-gray-700 text-white">
+  <span class="material-symbols-outlined font-medium">search</span>
+  <input type="text" placeholder="Search" class="text-[15px] ml-4 w-full bg-transparent focus:outline-none" />
+</div>
+
+<div class="p-2.5 mt-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
+  <span class="material-symbols-outlined font-medium">space_dashboard</span>
+  <span class="text-[15px] ml-4 text-gray-200 font-medium">Dashboard</span>
+</div>
+<div class="p-2.5 mt-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
+  <span class="material-symbols-outlined font-medium">group</span>
+  <span class="text-[15px] ml-4 text-gray-200 font-medium">Users</span>
+</div>
+
+<div class="my-4 bg-gray-600 h-[1px]"></div>
+<div class="p-2.5 mt-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+  (click)="dropdown()">
+  <span class="material-symbols-outlined font-medium">forum</span>
+  <div class="flex justify-between w-full items-center">
+    <span class="text-[15px] ml-4 text-gray-200 font-medium">Chat box</span>
+    <span class="material-symbols-outlined font-medium rotate-180" id="arrow">expand_more</span>
   </div>
-  <div class="p-2.5 mb-2 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-gray-700 text-white">
-    <span class="material-symbols-outlined font-medium">search</span>
-    <input type="text" placeholder="Search" class="text-[15px] ml-4 w-full bg-transparent focus:outline-none" />
-  </div>
-  <div class="p-2.5 mt-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
-    <span class="material-symbols-outlined font-medium">space_dashboard</span>
-    <span class="text-[15px] ml-4 text-gray-200 font-medium">Dashboard</span>
-  </div>
-  <div class="p-2.5 mt-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
-    <span class="material-symbols-outlined font-medium">group</span>
-    <span class="text-[15px] ml-4 text-gray-200 font-medium">Users</span>
-  </div>
-  <div class="my-4 bg-gray-600 h-[1px]"></div>
-  <div class="p-2.5 mt-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
-    (click)="dropdown()">
-    <span class="material-symbols-outlined font-medium">forum</span>
-    <div class="flex justify-between w-full items-center">
-      <span class="text-[15px] ml-4 text-gray-200 font-medium">Chat box</span>
-      <span class="material-symbols-outlined font-medium rotate-180" id="arrow">expand_more</span>
-    </div>
-  </div>
-  <div class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold" id="submenu">
-    <h1 class="cursor-pointer pl-5 pr-2 py-2 hover:bg-blue-600 rounded-md mt-1">
-      Social
-    </h1>
-    <h1 class="cursor-pointer pl-5 pr-2 py-2 hover:bg-blue-600 rounded-md mt-1">
-      Personal
-    </h1>
-    <h1 class="cursor-pointer pl-5 pr-2 py-2 hover:bg-blue-600 rounded-md mt-1">
-      Friends
-    </h1>
-  </div>
-  <div class="my-4 bg-gray-600 h-[1px]"></div>
-  <div class="p-2.5 mt-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
-    <span class="material-symbols-outlined font-medium">logout</span>
-    <span class="text-[15px] ml-4 text-gray-200 font-medium">Logout</span>
-  </div>
+</div>
+<div class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold" id="submenu">
+  <h1 class="cursor-pointer pl-5 pr-2 py-2 hover:bg-blue-600 rounded-md mt-1">
+    Social
+  </h1>
+  <h1 class="cursor-pointer pl-5 pr-2 py-2 hover:bg-blue-600 rounded-md mt-1">
+    Personal
+  </h1>
+  <h1 class="cursor-pointer pl-5 pr-2 py-2 hover:bg-blue-600 rounded-md mt-1">
+    Friends
+  </h1>
+</div>
+<div class="my-4 bg-gray-600 h-[1px]"></div>
+<div class="p-2.5 mt-1 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
+  <span class="material-symbols-outlined font-medium">logout</span>
+  <span class="text-[15px] ml-4 text-gray-200 font-medium">Logout</span>
 </div>

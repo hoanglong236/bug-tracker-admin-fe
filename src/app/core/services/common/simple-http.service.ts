@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  }),
 };
 
 @Injectable({
@@ -12,19 +13,19 @@ const httpOptions = {
 export class SimpleHttpService {
   constructor(private http: HttpClient) {}
 
-  get(url: string): Observable<any> {
+  get = (url: string) => {
     return this.http.get(url, httpOptions);
-  }
+  };
 
-  post(url: string, data: any): Observable<any> {
+  post = (url: string, data: any) => {
     return this.http.post(url, data, httpOptions);
-  }
+  };
 
-  put(url: string, data: any): Observable<any> {
+  put = (url: string, data: any) => {
     return this.http.put(url, data, httpOptions);
-  }
+  };
 
-  delete(url: string): Observable<any> {
+  delete = (url: string) => {
     return this.http.delete(url, httpOptions);
-  }
+  };
 }

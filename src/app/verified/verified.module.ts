@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { VerifiedRoutingModule } from './verified-routing.module';
 import { VerifiedLayoutComponent } from './layout/verified-layout/verified-layout.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ManageUsersComponent } from './components/manage-users/manage-users.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     SidebarComponent,
     HeaderComponent,
     DashboardComponent,
+    ManageUsersComponent,
   ],
-  imports: [CommonModule, VerifiedRoutingModule],
+  imports: [VerifiedRoutingModule, SharedModule],
 })
 export class VerifiedModule {}

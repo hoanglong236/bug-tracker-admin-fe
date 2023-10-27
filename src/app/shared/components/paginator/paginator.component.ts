@@ -10,14 +10,26 @@ export class PaginatorComponent {
   @Input() currentPage: number = 0;
   @Input() pageSize: number = 0;
 
+  @Output() previousBtnClickEvent = new EventEmitter();
   @Output() nextBtnClickEvent = new EventEmitter();
-  @Output() prevBtnClickEvent = new EventEmitter();
 
-  protected onNextBtnClick = () => {
-    this.nextBtnClickEvent.emit();
+  protected onPreviousBtnClick = () => {
+    if (!this.isFirstPage()) {
+      this.previousBtnClickEvent.emit();
+    }
   };
 
-  protected onPrevBtnClick = () => {
-    this.prevBtnClickEvent.emit();
+  protected isFirstPage = () => {
+    return this.currentPage === 0;
+  };
+
+  protected onNextBtnClick = () => {
+    if (!this.isLastPage()) {
+      this.nextBtnClickEvent.emit();
+    }
+  };
+
+  protected isLastPage = () => {
+    return this.currentPage === this.totalPages - 1;
   };
 }

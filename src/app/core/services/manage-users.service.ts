@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { SimpleHttpService } from './common/simple-http.service';
-import { FILTER_USERS_URL } from '../api-urls';
+import {
+  DELETE_USER_URL,
+  DISABLE_USER_URL,
+  ENABLE_USER_URL,
+  FILTER_USERS_URL,
+} from '../api-urls';
 import { FilterUsersRequestDTO } from '../dto';
 
 @Injectable({
@@ -12,9 +17,42 @@ export class ManageUsersService {
   filterUsers = (
     params: FilterUsersRequestDTO,
     onResolve: Function,
-    onReject: Function
+    onReject: Function = console.log
   ) => {
     this.simpleHttp.post(FILTER_USERS_URL, params).subscribe({
+      next: (value) => onResolve(value),
+      error: (err) => onReject(err),
+    });
+  };
+
+  disableUser = (
+    userId: number,
+    onResolve: Function,
+    onReject: Function = console.log
+  ) => {
+    this.simpleHttp.post(DISABLE_USER_URL + `/${userId}`, {}).subscribe({
+      next: (value) => onResolve(value),
+      error: (err) => onReject(err),
+    });
+  };
+
+  enableUser = (
+    userId: number,
+    onResolve: Function,
+    onReject: Function = console.log
+  ) => {
+    this.simpleHttp.post(ENABLE_USER_URL + `/${userId}`, {}).subscribe({
+      next: (value) => onResolve(value),
+      error: (err) => onReject(err),
+    });
+  };
+
+  deleteUser = (
+    userId: number,
+    onResolve: Function,
+    onReject: Function = console.log
+  ) => {
+    this.simpleHttp.delete(DELETE_USER_URL + `/${userId}`).subscribe({
       next: (value) => onResolve(value),
       error: (err) => onReject(err),
     });

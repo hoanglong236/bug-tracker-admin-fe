@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { UserResponseDTO } from 'src/app/core/dto';
+import { FilterUsersRequestDTO, UserResponseDTO } from 'src/app/core/dto';
 import { ManageUsersService } from 'src/app/core/services/manage-users.service';
 import { DateTimeUtilService } from 'src/app/core/services/utils/date-time-util.service';
 import { PaginatorComponent } from 'src/app/shared/components/paginator/paginator.component';
@@ -22,15 +22,29 @@ export class ManageUsersComponent implements AfterViewInit {
   ) {}
 
   ngAfterViewInit(): void {
-    this.manageUsersService.filterUsers(
-      {
-        pageNumber: 0,
-        pageSize: this.pageSize,
-      },
-      this.onFilterUsersSuccess,
-      this.onFilterUsersFailure
-    );
+    this.filterUsers({
+      pageNumber: 0,
+      pageSize: this.pageSize,
+    });
   }
+
+  protected goToNextPage = () => {
+    this.filterUsers({
+      pageNumber: this.paginator!.currentPage + 1,
+      pageSize: this.pageSize,
+    });
+  };
+
+  protected goToPreviousPage = () => {
+    this.filterUsers({
+      pageNumber: this.paginator!.currentPage - 1,
+      pageSize: this.pageSize,
+    });
+  };
+
+  private filterUsers = (params: FilterUsersRequestDTO) => {
+    this.manageUsersService.filterUsers(params, this.onFilterUsersSuccess);
+  };
 
   private onFilterUsersSuccess = (data: any) => {
     if (this.paginator) {
@@ -39,39 +53,50 @@ export class ManageUsersComponent implements AfterViewInit {
       this.paginator.pageSize = data.size;
     }
 
-    this.users = data.content.map((user: any) => {
-      return {
-        ...user,
-        createdAt: this.dateTimeUtil.formatDateString(user.createdAt),
-      };
-    });
+    this.users = data.content.map((user: UserResponseDTO) =>
+      this.formatUserDateTimeProps(user)
+    );
 
     this.totalUsers = data.totalElements;
   };
 
-  private onFilterUsersFailure = (err: any) => {
-    console.log(err);
+  private formatUserDateTimeProps = (user: UserResponseDTO) => {
+    return {
+      ...user,
+      createdAt: this.dateTimeUtil.formatDateString(user.createdAt),
+      updatedAt: this.dateTimeUtil.formatDateString(user.updatedAt),
+    };
   };
 
-  protected goToNextPage = () => {
-    this.manageUsersService.filterUsers(
-      {
-        pageNumber: this.paginator!.currentPage + 1,
-        pageSize: this.pageSize,
-      },
-      this.onFilterUsersSuccess,
-      this.onFilterUsersFailure
+  protected onDisableBtnClick = (userId: number) => {
+    this.manageUsersService.disableUser(userId, this.onUpdateUserSuccess);
+  };
+
+  protected onEnableBtnClick = (userId: number) => {
+    this.manageUsersService.enableUser(userId, this.onUpdateUserSuccess);
+  };
+
+  private onUpdateUserSuccess = (updatedUser: UserResponseDTO) => {
+    this.users = this.users.map((user) =>
+      user.id === updatedUser.id
+        ? this.formatUserDateTimeProps(updatedUser)
+        : user
     );
   };
 
-  protected goToPreviousPage = () => {
-    this.manageUsersService.filterUsers(
-      {
-        pageNumber: this.paginator!.currentPage - 1,
-        pageSize: this.pageSize,
-      },
-      this.onFilterUsersSuccess,
-      this.onFilterUsersFailure
-    );
+  protected onDeleteBtnClick = (userId: number) => {
+    this.manageUsersService.deleteUser(userId, this.onDeleteUserSuccess);
+  };
+
+  private onDeleteUserSuccess = () => {
+    let pageNumber = this.paginator!.currentPage;
+    if (this.users.length === 1 && this.paginator!.isLastPage()) {
+      pageNumber--;
+    }
+
+    this.filterUsers({
+      pageNumber: pageNumber,
+      pageSize: this.pageSize,
+    });
   };
 }

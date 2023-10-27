@@ -19,7 +19,7 @@ export class PaginatorComponent {
     }
   };
 
-  protected isFirstPage = () => {
+  public isFirstPage = () => {
     return this.currentPage === 0;
   };
 
@@ -29,7 +29,7 @@ export class PaginatorComponent {
     }
   };
 
-  protected isLastPage = () => {
+  public isLastPage = () => {
     return this.currentPage === this.totalPages - 1;
   };
 }

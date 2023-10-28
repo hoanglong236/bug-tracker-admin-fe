@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent {
-  protected signUpForm = this.formBuilder.group({
+  protected readonly signUpForm = this.formBuilder.group({
     name: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8)]],
@@ -17,9 +17,9 @@ export class SignUpComponent {
   });
 
   constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private router: Router
+    private readonly formBuilder: FormBuilder,
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {}
 
   protected onSubmit = () => {

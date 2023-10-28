@@ -7,5 +7,11 @@ import { ProjectResponseDTO } from 'src/app/core/dto';
   styleUrls: ['./project-card.component.scss'],
 })
 export class ProjectCardComponent {
-  @Input() project?: ProjectResponseDTO;
+  @Input() project!: ProjectResponseDTO;
+
+  protected onInfoBtnClick = (projectId: number) => {};
+
+  protected onEditBtnClick = (projectId: number) => {};
+
+  protected onDeleteBtnClick = (projectId: number) => {};
 }

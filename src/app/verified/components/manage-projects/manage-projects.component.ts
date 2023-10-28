@@ -10,7 +10,7 @@ import { PaginatorComponent } from 'src/app/shared/components/paginator/paginato
 })
 export class ManageProjectsComponent implements AfterViewInit {
   @ViewChild('paginator')
-  protected readonly paginator?: PaginatorComponent;
+  private readonly paginator!: PaginatorComponent;
 
   protected projects: ProjectResponseDTO[] = [];
   protected totalProjects: number = 0;
@@ -27,14 +27,14 @@ export class ManageProjectsComponent implements AfterViewInit {
 
   protected goToNextPage = () => {
     this.filterProjects({
-      pageNumber: this.paginator!.currentPage + 1,
+      pageNumber: this.paginator.currentPage + 1,
       pageSize: this.pageSize,
     });
   };
 
   protected goToPreviousPage = () => {
     this.filterProjects({
-      pageNumber: this.paginator!.currentPage - 1,
+      pageNumber: this.paginator.currentPage - 1,
       pageSize: this.pageSize,
     });
   };
@@ -47,8 +47,8 @@ export class ManageProjectsComponent implements AfterViewInit {
   };
 
   private onFilterProjectsSuccess = (data: any) => {
-    this.paginator!.totalPages = data.totalPages;
-    this.paginator!.currentPage = data.number;
+    this.paginator.totalPages = data.totalPages;
+    this.paginator.currentPage = data.number;
 
     this.projects = data.content.map((project: ProjectResponseDTO) =>
       this.manageProjectsService.formatProjectDateTimeProps(project)
@@ -56,10 +56,4 @@ export class ManageProjectsComponent implements AfterViewInit {
 
     this.totalProjects = data.totalElements;
   };
-
-  protected onOpenBtnClick = (projectId: number) => {};
-
-  protected onCloseBtnClick = (projectId: number) => {};
-
-  protected onDeleteBtnClick = (projectId: number) => {};
 }

@@ -10,7 +10,7 @@ import { PaginatorComponent } from 'src/app/shared/components/paginator/paginato
 })
 export class ManageUsersComponent implements AfterViewInit {
   @ViewChild('paginator')
-  protected readonly paginator?: PaginatorComponent;
+  private readonly paginator!: PaginatorComponent;
 
   protected users: UserResponseDTO[] = [];
   protected totalUsers: number = 0;
@@ -27,14 +27,14 @@ export class ManageUsersComponent implements AfterViewInit {
 
   protected goToNextPage = () => {
     this.filterUsers({
-      pageNumber: this.paginator!.currentPage + 1,
+      pageNumber: this.paginator.currentPage + 1,
       pageSize: this.pageSize,
     });
   };
 
   protected goToPreviousPage = () => {
     this.filterUsers({
-      pageNumber: this.paginator!.currentPage - 1,
+      pageNumber: this.paginator.currentPage - 1,
       pageSize: this.pageSize,
     });
   };
@@ -44,8 +44,8 @@ export class ManageUsersComponent implements AfterViewInit {
   };
 
   private onFilterUsersSuccess = (data: any) => {
-    this.paginator!.totalPages = data.totalPages;
-    this.paginator!.currentPage = data.number;
+    this.paginator.totalPages = data.totalPages;
+    this.paginator.currentPage = data.number;
 
     this.users = data.content.map((user: UserResponseDTO) =>
       this.manageUsersService.formatUserDateTimeProps(user)
@@ -59,8 +59,8 @@ export class ManageUsersComponent implements AfterViewInit {
   };
 
   private onDeleteUserSuccess = () => {
-    let pageNumber = this.paginator!.currentPage;
-    if (this.users.length === 1 && this.paginator!.isLastPage()) {
+    let pageNumber = this.paginator.currentPage;
+    if (this.users.length === 1 && this.paginator.isLastPage()) {
       pageNumber--;
     }
 

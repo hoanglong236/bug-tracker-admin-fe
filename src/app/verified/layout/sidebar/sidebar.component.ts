@@ -8,7 +8,10 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router
+  ) {
     this.dropdown();
   }
 

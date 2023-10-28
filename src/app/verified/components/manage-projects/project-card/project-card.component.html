@@ -1,7 +1,7 @@
 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
   <div class="p-5">
     <a href="#">
-      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ project?.name }}</h5>
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ project.name }}</h5>
     </a>
     <h3 class="text-gray-700 text-sm">
       <span class="font-medium">Type: </span>Web Application
@@ -20,15 +20,22 @@
     </h3>
     <h3 class="mt-1 text-gray-700 text-sm">
       <span class="font-medium">Status: </span>
-      <span [ngClass]="project?.closeFlag ? '' : 'text-green-600'">
-        {{ project?.closeFlag ? 'Closed' : 'Open' }}
+      <span [ngClass]="project.closeFlag ? '' : 'text-green-600'">
+        {{ project.closeFlag ? 'Closed' : 'Open' }}
       </span>
     </h3>
 
-    <p class="mt-2 text-gray-700 text-sm">{{ project?.note }}</p>
-    <button class="p-2 inline-flex items-center rounded bg-primary text-gray-200">
-      <span class="material-symbols-outlined font-medium">info</span>
-      <span class="ml-1">Details</span>
-    </button>
+    <p class="mt-2 text-gray-700 text-sm">{{ project.note }}</p>
+    <div class="flex flex-wrap gap-2 text-gray-100">
+      <button (click)="onInfoBtnClick(project.id)" class="p-2 inline-flex items-center rounded bg-primary">
+        <span class="material-symbols-outlined mr-1">info</span>Info
+      </button>
+      <button (click)="onEditBtnClick(project.id)" class="p-2 inline-flex items-center rounded bg-green-600">
+        <span class="material-symbols-outlined mr-1">edit_square</span>Edit
+      </button>
+      <button (click)="onDeleteBtnClick(project.id)" class="p-2 inline-flex items-center rounded bg-danger">
+        <span class="material-symbols-outlined mr-1">delete</span>Delete
+      </button>
+    </div>
   </div>
 </div>

@@ -1,25 +1,22 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FilterProjectsRequestDTO, ProjectResponseDTO } from 'src/app/core/dto';
 import { ManageProjectsService } from 'src/app/core/services/manage-projects.service';
-import { DateTimeUtilService } from 'src/app/core/services/utils/date-time-util.service';
 import { PaginatorComponent } from 'src/app/shared/components/paginator/paginator.component';
 
 @Component({
-  selector: 'app-manage-projects',
+  selector: 'manage-projects-component',
   templateUrl: './manage-projects.component.html',
   styleUrls: ['./manage-projects.component.scss'],
 })
 export class ManageProjectsComponent implements AfterViewInit {
-  @ViewChild('paginator') protected paginator?: PaginatorComponent;
+  @ViewChild('paginator')
+  protected readonly paginator?: PaginatorComponent;
 
   protected projects: ProjectResponseDTO[] = [];
   protected totalProjects: number = 0;
-  private readonly pageSize: number = 12;
+  private readonly pageSize: number = 8;
 
-  constructor(
-    private readonly manageProjectsService: ManageProjectsService,
-    private readonly dateTimeUtil: DateTimeUtilService
-  ) {}
+  constructor(private readonly manageProjectsService: ManageProjectsService) {}
 
   ngAfterViewInit(): void {
     this.filterProjects({
@@ -50,25 +47,14 @@ export class ManageProjectsComponent implements AfterViewInit {
   };
 
   private onFilterProjectsSuccess = (data: any) => {
-    if (this.paginator) {
-      this.paginator.totalPages = data.totalPages;
-      this.paginator.currentPage = data.number;
-      this.paginator.pageSize = data.size;
-    }
+    this.paginator!.totalPages = data.totalPages;
+    this.paginator!.currentPage = data.number;
 
     this.projects = data.content.map((project: ProjectResponseDTO) =>
-      this.formatProjectDateTimeProps(project)
+      this.manageProjectsService.formatProjectDateTimeProps(project)
     );
 
     this.totalProjects = data.totalElements;
-  };
-
-  private formatProjectDateTimeProps = (project: ProjectResponseDTO) => {
-    return {
-      ...project,
-      createdAt: this.dateTimeUtil.formatDateString(project.createdAt),
-      updatedAt: this.dateTimeUtil.formatDateString(project.updatedAt),
-    };
   };
 
   protected onOpenBtnClick = (projectId: number) => {};

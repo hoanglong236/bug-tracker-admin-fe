@@ -43,81 +43,9 @@
     <shared-search-bar></shared-search-bar>
   </div>
 
-  <div class="flex flex-col mt-6">
-    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-        <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-          <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-            <thead class="bg-gray-50 dark:bg-gray-800">
-              <tr>
-                <th scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
-                  ID</th>
-                <th scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
-                  Name</th>
-                <th scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
-                  Note</th>
-                <th scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
-                  Status</th>
-                <th scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
-                  Created At</th>
-                <th scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
-                  Updated At</th>
-                <th scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
-                  Action</th>
-              </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-              <tr *ngFor="let project of projects">
-                <td class="p-4 text-sm font-medium whitespace-nowrap">
-                  <div>
-                    <h3 class="font-normal text-gray-800 dark:text-white">{{ project.id }}</h3>
-                  </div>
-                </td>
-                <td class="p-4 text-sm whitespace-nowrap">
-                  <h3 class="font-normal text-gray-800 dark:text-white">{{ project.name }}</h3>
-                </td>
-                <td class="p-4 text-sm whitespace-nowrap">
-                  <h3 class="font-normal text-gray-800 dark:text-white">{{ project.note }}</h3>
-                </td>
-                <td class="p-4 text-sm whitespace-nowrap">
-                  <h3 class="font-normal" [ngClass]="project.closeFlag ? 'text-success' : 'text-disable'">
-                    {{ project.closeFlag ? 'Open' : 'Closed' }}
-                  </h3>
-                </td>
-                <td class="p-4 text-sm whitespace-nowrap">
-                  <h3 class="font-normal text-gray-800 dark:text-white">{{ project.createdAt }}</h3>
-                </td>
-                <td class="p-4 text-sm whitespace-nowrap">
-                  <h3 class="font-normal text-gray-800 dark:text-white">{{ project.updatedAt }}</h3>
-                </td>
-                <td class="p-4 text-sm whitespace-nowrap">
-                  <div class="flex items-center gap-1">
-                    <ng-container *ngIf="project.closeFlag; then openBtnBlock; else closeBtnBlock"></ng-container>
-                    <ng-template #openBtnBlock>
-                      <button (click)="onOpenBtnClick(project.id)"
-                        class="text-white p-2 rounded bg-success w-16">Open</button>
-                    </ng-template>
-                    <ng-template #closeBtnBlock>
-                      <button (click)="onCloseBtnClick(project.id)"
-                        class="text-white p-2 rounded bg-disable w-16">Disable</button>
-                    </ng-template>
-                    <button (click)="onDeleteBtnClick(project.id)"
-                      class="bg-danger text-white p-2 rounded">Delete</button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+  <div
+    class="mt-6 grid grid-flow-row gap-6 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <project-card *ngFor="let project of projects;" [project]="project"></project-card>
   </div>
 
   <shared-paginator #paginator (nextBtnClickEvent)="goToNextPage()"

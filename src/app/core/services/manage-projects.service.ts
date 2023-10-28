@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
+
 import { SimpleHttpService } from './common/simple-http.service';
+import { DateTimeUtilService } from './utils/date-time-util.service';
 import { FILTER_PROJECTS_URL } from '../api-urls';
-import { FilterProjectsRequestDTO } from '../dto';
+import { FilterProjectsRequestDTO, ProjectResponseDTO } from '../dto';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ManageProjectsService {
-  constructor(private readonly simpleHttp: SimpleHttpService) {}
+  constructor(
+    private readonly simpleHttp: SimpleHttpService,
+    private readonly dateTimeUtil: DateTimeUtilService
+  ) {}
 
   filterProjects = (
     params: FilterProjectsRequestDTO,
@@ -18,5 +23,13 @@ export class ManageProjectsService {
       next: (value) => onResolve(value),
       error: (err) => onReject(err),
     });
+  };
+
+  formatProjectDateTimeProps = (project: ProjectResponseDTO) => {
+    return {
+      ...project,
+      createdAt: this.dateTimeUtil.formatDateString(project.createdAt),
+      updatedAt: this.dateTimeUtil.formatDateString(project.updatedAt),
+    };
   };
 }

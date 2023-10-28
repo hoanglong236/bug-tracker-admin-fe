@@ -9,6 +9,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 import { UsersTableComponent } from './components/manage-users/users-table/users-table.component';
 import { ManageProjectsComponent } from './components/manage-projects/manage-projects.component';
+import { ProjectCardComponent } from './components/manage-projects/project-card/project-card.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ManageProjectsComponent } from './components/manage-projects/manage-pro
     ManageUsersComponent,
     UsersTableComponent,
     ManageProjectsComponent,
+    ProjectCardComponent,
   ],
   imports: [VerifiedRoutingModule, SharedModule],
 })

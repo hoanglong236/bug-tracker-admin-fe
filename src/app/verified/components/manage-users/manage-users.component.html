@@ -6,7 +6,7 @@
         <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">
           {{ totalUsers }} users</span>
       </div>
-      <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">These users are registered in the system.</p>
+      <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">These users are registered in the system.</p>
     </div>
 
     <div class="flex items-center mt-4 gap-x-3">
@@ -40,13 +40,7 @@
       </button>
     </div>
 
-    <div class="relative flex items-center mt-4 md:mt-0">
-      <span class="absolute flex items-center">
-        <span class="material-symbols-outlined mx-3 text-gray-400 dark:text-gray-600">search</span>
-      </span>
-      <input type="text" placeholder="Search"
-        class="block w-full py-2 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
-    </div>
+    <shared-search-bar></shared-search-bar>
   </div>
 
   <div class="flex flex-col mt-6">
@@ -57,28 +51,28 @@
             <thead class="bg-gray-50 dark:bg-gray-800">
               <tr>
                 <th scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
                   ID</th>
                 <th scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
                   Email</th>
                 <th scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
                   Name</th>
                 <th scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
                   Role</th>
                 <th scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
                   Status</th>
                 <th scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
                   Created At</th>
                 <th scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
                   Updated At</th>
                 <th scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
                   Action</th>
               </tr>
             </thead>
@@ -99,7 +93,7 @@
                   <h3 class="font-normal text-gray-800 dark:text-white">{{ user.role }}</h3>
                 </td>
                 <td class="p-4 text-sm whitespace-nowrap">
-                  <h3 class="font-normal" [ngClass]="user.enableFlag ? 'text-success' : 'text-danger'">
+                  <h3 class="font-normal" [ngClass]="user.enableFlag ? 'text-success' : 'text-disable'">
                     {{ user.enableFlag ? 'Enabled' : 'Disabled' }}
                   </h3>
                 </td>
@@ -114,7 +108,7 @@
                     <ng-container *ngIf="user.enableFlag; then disableBtnBlock; else enableBtnBlock"></ng-container>
                     <ng-template #disableBtnBlock>
                       <button (click)="onDisableBtnClick(user.id)"
-                        class="text-white p-2 rounded bg-gray-500 w-16">Disable</button>
+                        class="text-white p-2 rounded bg-disable w-16">Disable</button>
                     </ng-template>
                     <ng-template #enableBtnBlock>
                       <button (click)="onEnableBtnClick(user.id)"

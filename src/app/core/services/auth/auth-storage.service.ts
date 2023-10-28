@@ -7,7 +7,7 @@ const AUTHORIZATION_TOKEN = 'authorization-token';
   providedIn: 'root',
 })
 export class AuthStorageService {
-  constructor(private sessionStorageService: SessionStorageService) {}
+  constructor(private readonly sessionStorageService: SessionStorageService) {}
 
   saveAuthorizationToken = (token: string) => {
     this.sessionStorageService.saveItem(AUTHORIZATION_TOKEN, token);

@@ -6,16 +6,16 @@ import {
   ENABLE_USER_URL,
   FILTER_USERS_URL,
 } from '../api-urls';
-import { FilterUsersRequestDTO } from '../dto';
+import { UserFilterRequestDTO } from '../dto';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ManageUsersService {
-  constructor(private simpleHttp: SimpleHttpService) {}
+  constructor(private readonly simpleHttp: SimpleHttpService) {}
 
   filterUsers = (
-    params: FilterUsersRequestDTO,
+    params: UserFilterRequestDTO,
     onResolve: Function,
     onReject: Function = console.log
   ) => {

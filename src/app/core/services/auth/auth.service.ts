@@ -10,8 +10,8 @@ import { SignInRequestDTO, SignUpRequestDTO } from '../../dto';
 })
 export class AuthService {
   constructor(
-    private simpleHttp: SimpleHttpService,
-    private authStorageService: AuthStorageService
+    private readonly simpleHttp: SimpleHttpService,
+    private readonly authStorageService: AuthStorageService
   ) {}
 
   signIn = (
@@ -28,7 +28,7 @@ export class AuthService {
 
         onResolve();
       },
-      error: (err: any) => onReject(err),
+      error: (err) => onReject(err),
     });
   };
 
@@ -39,7 +39,7 @@ export class AuthService {
   ) => {
     this.simpleHttp.post(SIGN_UP_URL, params).subscribe({
       next: () => onResolve(),
-      error: (err: any) => onReject(err),
+      error: (err) => onReject(err),
     });
   };
 

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { FilterUsersRequestDTO, UserResponseDTO } from 'src/app/core/dto';
+import { UserFilterRequestDTO, UserResponseDTO } from 'src/app/core/dto';
 import { ManageUsersService } from 'src/app/core/services/manage-users.service';
 import { DateTimeUtilService } from 'src/app/core/services/utils/date-time-util.service';
 import { PaginatorComponent } from 'src/app/shared/components/paginator/paginator.component';
@@ -17,8 +17,8 @@ export class ManageUsersComponent implements AfterViewInit {
   private readonly pageSize: number = 12;
 
   constructor(
-    private manageUsersService: ManageUsersService,
-    private dateTimeUtil: DateTimeUtilService
+    private readonly manageUsersService: ManageUsersService,
+    private readonly dateTimeUtil: DateTimeUtilService
   ) {}
 
   ngAfterViewInit(): void {
@@ -42,7 +42,7 @@ export class ManageUsersComponent implements AfterViewInit {
     });
   };
 
-  private filterUsers = (params: FilterUsersRequestDTO) => {
+  private filterUsers = (params: UserFilterRequestDTO) => {
     this.manageUsersService.filterUsers(params, this.onFilterUsersSuccess);
   };
 
@@ -69,11 +69,15 @@ export class ManageUsersComponent implements AfterViewInit {
   };
 
   protected onDisableBtnClick = (userId: number) => {
-    this.manageUsersService.disableUser(userId, this.onUpdateUserSuccess);
+    if (confirm('Are you sure you want to disable this user?')) {
+      this.manageUsersService.disableUser(userId, this.onUpdateUserSuccess);
+    }
   };
 
   protected onEnableBtnClick = (userId: number) => {
-    this.manageUsersService.enableUser(userId, this.onUpdateUserSuccess);
+    if (confirm('Are you sure you want to enable this user?')) {
+      this.manageUsersService.enableUser(userId, this.onUpdateUserSuccess);
+    }
   };
 
   private onUpdateUserSuccess = (updatedUser: UserResponseDTO) => {
@@ -85,7 +89,9 @@ export class ManageUsersComponent implements AfterViewInit {
   };
 
   protected onDeleteBtnClick = (userId: number) => {
-    this.manageUsersService.deleteUser(userId, this.onDeleteUserSuccess);
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.manageUsersService.deleteUser(userId, this.onDeleteUserSuccess);
+    }
   };
 
   private onDeleteUserSuccess = () => {

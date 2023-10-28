@@ -11,7 +11,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class SimpleHttpService {
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   get = (url: string) => {
     return this.http.get(url, httpOptions);

@@ -8,7 +8,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class PaginatorComponent {
   @Input() totalPages: number = 0;
   @Input() currentPage: number = 0;
-  @Input() pageSize: number = 0;
 
   @Output() previousBtnClickEvent = new EventEmitter();
   @Output() nextBtnClickEvent = new EventEmitter();

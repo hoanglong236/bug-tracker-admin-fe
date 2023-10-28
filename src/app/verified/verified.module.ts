@@ -7,6 +7,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 import { SharedModule } from '../shared/shared.module';
+import { ManageProjectsComponent } from './components/manage-projects/manage-projects.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { SharedModule } from '../shared/shared.module';
     HeaderComponent,
     DashboardComponent,
     ManageUsersComponent,
+    ManageProjectsComponent,
   ],
   imports: [VerifiedRoutingModule, SharedModule],
 })

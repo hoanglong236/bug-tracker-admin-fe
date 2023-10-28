@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { VerifiedLayoutComponent } from './layout/verified-layout/verified-layout.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
+import { ManageProjectsComponent } from './components/manage-projects/manage-projects.component';
 
 const routes: Routes = [
   {
@@ -10,6 +11,7 @@ const routes: Routes = [
     component: VerifiedLayoutComponent,
     children: [
       { path: 'users', component: ManageUsersComponent },
+      { path: 'projects', component: ManageProjectsComponent },
       { path: '', component: DashboardComponent },
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],

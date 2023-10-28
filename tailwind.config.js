@@ -8,6 +8,7 @@ module.exports = {
         warning: '#eab308',
         danger: '#e11d48',
         success: '#22c55e',
+        disable: '#6b7280',
       },
     },
   },

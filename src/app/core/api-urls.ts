@@ -8,3 +8,6 @@ export const FILTER_USERS_URL = BASE_USERS_URL;
 export const DISABLE_USER_URL = BASE_USERS_URL + '/disable';
 export const ENABLE_USER_URL = BASE_USERS_URL + '/enable';
 export const DELETE_USER_URL = BASE_USERS_URL + '/delete';
+
+const BASE_PROJECTS_URL = BASE_API_URL + '/projects';
+export const FILTER_PROJECTS_URL = BASE_PROJECTS_URL;

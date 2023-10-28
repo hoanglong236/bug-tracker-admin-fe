@@ -1,4 +1,4 @@
-export type UserFilterRequestDTO = {
+export type FilterUsersRequestDTO = {
   pageNumber: number;
   pageSize: number;
 };

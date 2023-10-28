@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { UserFilterRequestDTO, UserResponseDTO } from 'src/app/core/dto';
+import { FilterUsersRequestDTO, UserResponseDTO } from 'src/app/core/dto';
 import { ManageUsersService } from 'src/app/core/services/manage-users.service';
 import { DateTimeUtilService } from 'src/app/core/services/utils/date-time-util.service';
 import { PaginatorComponent } from 'src/app/shared/components/paginator/paginator.component';
@@ -42,7 +42,7 @@ export class ManageUsersComponent implements AfterViewInit {
     });
   };
 
-  private filterUsers = (params: UserFilterRequestDTO) => {
+  private filterUsers = (params: FilterUsersRequestDTO) => {
     this.manageUsersService.filterUsers(params, this.onFilterUsersSuccess);
   };
 

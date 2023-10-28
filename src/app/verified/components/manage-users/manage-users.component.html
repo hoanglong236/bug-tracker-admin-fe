@@ -6,7 +6,7 @@
         <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">
           {{ totalUsers }} users</span>
       </div>
-      <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">These companies have purchased in the last 12 months.</p>
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">These users are registered in the system.</p>
     </div>
 
     <div class="flex items-center mt-4 gap-x-3">
@@ -111,12 +111,12 @@
                 </td>
                 <td class="p-4 text-sm whitespace-nowrap">
                   <div class="flex items-center gap-1">
-                    <ng-container *ngIf="user.enableFlag; then disableBlock; else enableBlock"></ng-container>
-                    <ng-template #disableBlock>
+                    <ng-container *ngIf="user.enableFlag; then disableBtnBlock; else enableBtnBlock"></ng-container>
+                    <ng-template #disableBtnBlock>
                       <button (click)="onDisableBtnClick(user.id)"
                         class="text-white p-2 rounded bg-gray-500 w-16">Disable</button>
                     </ng-template>
-                    <ng-template #enableBlock>
+                    <ng-template #enableBtnBlock>
                       <button (click)="onEnableBtnClick(user.id)"
                         class="text-white p-2 rounded bg-success w-16">Enable</button>
                     </ng-template>

@@ -9,7 +9,7 @@ import { ProjectResponseDTO } from 'src/app/core/dto';
 export class ProjectCardComponent {
   @Input() project!: ProjectResponseDTO;
 
-  protected onInfoBtnClick = (projectId: number) => {};
+  protected onDetailsBtnClick = (projectId: number) => {};
 
   protected onEditBtnClick = (projectId: number) => {};
 

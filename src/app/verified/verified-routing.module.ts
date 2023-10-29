@@ -1,18 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { VerifiedLayoutComponent } from './layout/verified-layout/verified-layout.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ManageUsersComponent } from './components/manage-users/manage-users.component';
-import { ManageProjectsComponent } from './components/manage-projects/manage-projects.component';
 
 const routes: Routes = [
   {
     path: '',
     component: VerifiedLayoutComponent,
     children: [
-      { path: 'users', component: ManageUsersComponent },
-      { path: 'projects', component: ManageProjectsComponent },
-      { path: '', component: DashboardComponent },
+      {
+        path: 'users',
+        loadChildren: () =>
+          import('./users/users.module').then((m) => m.UsersModule),
+      },
+      {
+        path: 'projects',
+        loadChildren: () =>
+          import('./projects/projects.module').then((m) => m.ProjectsModule),
+      },
+      {
+        path: '',
+        loadChildren: () =>
+          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+      },
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],
   },

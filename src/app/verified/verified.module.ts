@@ -5,23 +5,9 @@ import { SharedModule } from '../shared/shared.module';
 import { VerifiedLayoutComponent } from './layout/verified-layout/verified-layout.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { HeaderComponent } from './layout/header/header.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ManageUsersComponent } from './components/manage-users/manage-users.component';
-import { UsersTableComponent } from './components/manage-users/users-table/users-table.component';
-import { ManageProjectsComponent } from './components/manage-projects/manage-projects.component';
-import { ProjectCardComponent } from './components/manage-projects/project-card/project-card.component';
 
 @NgModule({
-  declarations: [
-    VerifiedLayoutComponent,
-    SidebarComponent,
-    HeaderComponent,
-    DashboardComponent,
-    ManageUsersComponent,
-    UsersTableComponent,
-    ManageProjectsComponent,
-    ProjectCardComponent,
-  ],
+  declarations: [VerifiedLayoutComponent, SidebarComponent, HeaderComponent],
   imports: [VerifiedRoutingModule, SharedModule],
 })
 export class VerifiedModule {}

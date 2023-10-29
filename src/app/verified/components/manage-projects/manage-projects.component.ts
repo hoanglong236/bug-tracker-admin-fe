@@ -9,8 +9,7 @@ import { PaginatorComponent } from 'src/app/shared/components/paginator/paginato
   styleUrls: ['./manage-projects.component.scss'],
 })
 export class ManageProjectsComponent implements AfterViewInit {
-  @ViewChild('paginator')
-  private readonly paginator!: PaginatorComponent;
+  @ViewChild('paginator') private paginator!: PaginatorComponent;
 
   protected projects: ProjectResponseDTO[] = [];
   protected totalProjects: number = 0;

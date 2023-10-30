@@ -40,13 +40,16 @@ export class SignUpComponent {
       const control = abstractControl.get(controlName);
       const matchingControl = abstractControl.get(matchingControlName);
 
-      if (!control || !matchingControl || matchingControl.errors) {
+      if (!control || !matchingControl) {
+        return { matchValidate: 'Controls not found.' };
+      }
+      if (matchingControl.errors) {
         return null;
       }
       if (control.value === matchingControl.value) {
         return null;
       }
-      const errors = { matchValidate: 'Control does not match.' };
+      const errors = { matchValidate: 'Controls do not match.' };
       matchingControl.setErrors(errors);
       return errors;
     };
@@ -70,7 +73,9 @@ export class SignUpComponent {
 
   protected onSubmit = () => {
     if (this.signUpForm.invalid) {
-      alert('Please enter a valid password or email address');
+      alert(
+        'Please fill in all fields in the sign up form completely and accurately!'
+      );
       return;
     }
 

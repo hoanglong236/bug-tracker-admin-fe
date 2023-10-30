@@ -47,7 +47,7 @@
         </div>
       </div>
       <div>
-        <label for="confirmPassword" class="block text-sm font-medium leading-6 text-gray-900">Confirm Password
+        <label for="confirmPassword" class="block text-sm font-medium leading-6 text-gray-900">Confirm your password
         </label>
         <div class="mt-1">
           <input id="confirmPassword" type="password" formControlName="confirmPassword" required
@@ -55,8 +55,8 @@
         </div>
         <div *ngIf="confirmPasswordControl.invalid && (confirmPasswordControl.dirty || confirmPasswordControl.touched)"
           class="text-danger italic text-sm">
-          <div *ngIf="confirmPasswordControl.errors?.['required']">* Confirm password is required.</div>
-          <div *ngIf="confirmPasswordControl.errors?.['matchValidate']">* Confirm password does not match.</div>
+          <div *ngIf="confirmPasswordControl.errors?.['required']">* Password confirmation is required.</div>
+          <div *ngIf="confirmPasswordControl.errors?.['matchValidate']">* Confirm passwords do not match.</div>
         </div>
       </div>
       <div>

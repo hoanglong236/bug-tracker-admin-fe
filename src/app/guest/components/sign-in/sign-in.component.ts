@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent {
-  protected readonly signInForm = this.formBuilder.group({
+  protected signInForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8)]],
   });
@@ -20,15 +20,22 @@ export class SignInComponent {
     private readonly router: Router
   ) {}
 
+  protected get emailControl() {
+    return this.signInForm.get('email')!;
+  }
+
+  protected get passwordControl() {
+    return this.signInForm.get('password')!;
+  }
+
   protected onSubmit = () => {
     if (this.signInForm.invalid) {
-      alert('Error: Invalid credentials or password entered');
       return;
     }
 
     const formValue = this.signInForm.value;
     this.authService.signIn(
-      { email: formValue.email ?? '', password: formValue.password ?? '' },
+      { email: formValue.email!, password: formValue.password! },
       this.onSignInSuccess,
       this.onSignInFailure
     );

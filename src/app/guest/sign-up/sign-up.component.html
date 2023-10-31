@@ -56,7 +56,7 @@
         <div *ngIf="confirmPasswordControl.invalid && (confirmPasswordControl.dirty || confirmPasswordControl.touched)"
           class="text-danger italic text-sm">
           <div *ngIf="confirmPasswordControl.errors?.['required']">* Password confirmation is required.</div>
-          <div *ngIf="confirmPasswordControl.errors?.['matchValidate']">* Confirm passwords do not match.</div>
+          <div *ngIf="confirmPasswordControl.errors?.['matchValidate']">* Passwords do not match.</div>
         </div>
       </div>
       <div>

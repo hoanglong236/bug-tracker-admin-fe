@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { matchControlsValidator } from './match-controls.validator';
 
 @Component({
   selector: 'guest-sign-up',
@@ -22,7 +18,7 @@ export class SignUpComponent {
       confirmPassword: ['', [Validators.required]],
     },
     {
-      validators: this.matchValidator('password', 'confirmPassword'),
+      validators: matchControlsValidator('password', 'confirmPassword'),
     }
   );
 
@@ -31,29 +27,6 @@ export class SignUpComponent {
     private readonly authService: AuthService,
     private readonly router: Router
   ) {}
-
-  matchValidator(
-    controlName: string,
-    matchingControlName: string
-  ): ValidatorFn {
-    return (abstractControl: AbstractControl) => {
-      const control = abstractControl.get(controlName);
-      const matchingControl = abstractControl.get(matchingControlName);
-
-      if (!control || !matchingControl) {
-        return { matchValidate: 'Controls not found.' };
-      }
-      if (matchingControl.errors) {
-        return null;
-      }
-      if (control.value === matchingControl.value) {
-        return null;
-      }
-      const errors = { matchValidate: 'Controls do not match.' };
-      matchingControl.setErrors(errors);
-      return errors;
-    };
-  }
 
   protected get nameControl() {
     return this.signUpForm.get('name')!;

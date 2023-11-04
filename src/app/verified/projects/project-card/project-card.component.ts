@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProjectResponseDTO } from 'src/app/core/dto';
 
 @Component({
@@ -9,9 +9,11 @@ import { ProjectResponseDTO } from 'src/app/core/dto';
 export class ProjectCardComponent {
   @Input() project!: ProjectResponseDTO;
 
-  protected onDetailsBtnClick = (projectId: number) => {};
+  @Output() deleteProjectEvent = new EventEmitter<number>();
 
-  protected onEditBtnClick = (projectId: number) => {};
-
-  protected onDeleteBtnClick = (projectId: number) => {};
+  protected deleteProject = () => {
+    if (confirm('Are you sure you want to delete this project?')) {
+      this.deleteProjectEvent.emit(this.project.id);
+    }
+  };
 }

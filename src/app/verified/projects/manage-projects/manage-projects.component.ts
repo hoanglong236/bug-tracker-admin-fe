@@ -55,4 +55,23 @@ export class ManageProjectsComponent implements AfterViewInit {
 
     this.totalProjects = data.totalElements;
   };
+
+  protected deleteProject = (projectId: number) => {
+    this.manageProjectsService.deleteProject(
+      projectId,
+      this.onDeleteProjectSuccess
+    );
+  };
+
+  private onDeleteProjectSuccess = () => {
+    let pageNumber = this.paginator.currentPage;
+    if (this.projects.length === 1 && this.paginator.isLastPage()) {
+      pageNumber--;
+    }
+
+    this.filterProjects({
+      pageNumber: pageNumber,
+      pageSize: this.pageSize,
+    });
+  };
 }

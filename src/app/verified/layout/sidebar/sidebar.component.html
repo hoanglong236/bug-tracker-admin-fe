@@ -1,15 +1,15 @@
 <div class="mb-3 bg-gray-600 h-[1px]"></div>
-<a routerLink="." [routerLinkActive]="['bg-blue-600']" [routerLinkActiveOptions]="{exact: true}"
+<a routerLink="./" [routerLinkActive]="['bg-blue-600']" [routerLinkActiveOptions]="{exact: true}"
   class="py-2 px-4 mt-1 flex items-center rounded-md duration-300 cursor-pointer hover:bg-blue-600 text-gray-200">
   <span class="material-symbols-outlined font-medium">space_dashboard</span>
   <h3 class="text-[15px] ml-4 font-medium">Dashboard</h3>
 </a>
-<a routerLink="users" [routerLinkActive]="['bg-blue-600']"
+<a routerLink="./users" [routerLinkActive]="['bg-blue-600']"
   class="py-2 px-4 mt-1 flex items-center rounded-md duration-300 cursor-pointer hover:bg-blue-600 text-gray-200">
   <span class="material-symbols-outlined font-medium">group</span>
   <h3 class="text-[15px] ml-4 font-medium">Users</h3>
 </a>
-<a routerLink="projects" [routerLinkActive]="['bg-blue-600']"
+<a routerLink="./projects" [routerLinkActive]="['bg-blue-600']"
   class="py-2 px-4 mt-1 flex items-center rounded-md duration-300 cursor-pointer hover:bg-blue-600 text-gray-200">
   <span class="material-symbols-outlined font-medium">package_2</span>
   <h3 class="text-[15px] ml-4 font-medium">Projects</h3>
@@ -37,8 +37,8 @@
 </div>
 
 <div class="my-3 bg-gray-600 h-[1px]"></div>
-<a (click)="onSignOut()"
+<button (click)="signOut()"
   class="py-2 px-4 mt-1 flex items-center rounded-md duration-300 cursor-pointer hover:bg-blue-600 text-gray-200">
   <span class="material-symbols-outlined font-medium">logout</span>
   <h3 class="text-[15px] ml-4 font-medium">Sign out</h3>
-</a>
+</button>

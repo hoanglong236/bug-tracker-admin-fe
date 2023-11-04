@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 
@@ -7,11 +7,13 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent {
+export class SidebarComponent implements AfterViewInit {
   constructor(
-    private readonly authService: AuthService,
-    private readonly router: Router
-  ) {
+    private readonly router: Router,
+    private readonly authService: AuthService
+  ) {}
+
+  ngAfterViewInit(): void {
     this.dropdown();
   }
 
@@ -20,7 +22,7 @@ export class SidebarComponent {
     document.querySelector('#arrow')?.classList.toggle('rotate-180');
   };
 
-  protected onSignOut = () => {
+  protected signOut = () => {
     this.authService.signOut(this.onSignOutSuccess);
   };
 

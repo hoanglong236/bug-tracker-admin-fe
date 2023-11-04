@@ -35,10 +35,12 @@ export class ManageUsersService {
     onResolve: Function,
     onReject: Function = console.log
   ) => {
-    this.simpleHttp.post(DISABLE_USER_URL + `/${userId}`, {}).subscribe({
-      next: (value) => onResolve(value),
-      error: (err) => onReject(err),
-    });
+    this.simpleHttp
+      .post(DISABLE_USER_URL.replace(':id', `${userId}`), {})
+      .subscribe({
+        next: (value) => onResolve(value),
+        error: (err) => onReject(err),
+      });
   };
 
   enableUser = (
@@ -46,10 +48,12 @@ export class ManageUsersService {
     onResolve: Function,
     onReject: Function = console.log
   ) => {
-    this.simpleHttp.post(ENABLE_USER_URL + `/${userId}`, {}).subscribe({
-      next: (value) => onResolve(value),
-      error: (err) => onReject(err),
-    });
+    this.simpleHttp
+      .post(ENABLE_USER_URL.replace(':id', `${userId}`), {})
+      .subscribe({
+        next: (value) => onResolve(value),
+        error: (err) => onReject(err),
+      });
   };
 
   deleteUser = (
@@ -57,10 +61,12 @@ export class ManageUsersService {
     onResolve: Function,
     onReject: Function = console.log
   ) => {
-    this.simpleHttp.delete(DELETE_USER_URL + `/${userId}`).subscribe({
-      next: (value) => onResolve(value),
-      error: (err) => onReject(err),
-    });
+    this.simpleHttp
+      .delete(DELETE_USER_URL.replace(':id', `${userId}`))
+      .subscribe({
+        next: (value) => onResolve(value),
+        error: (err) => onReject(err),
+      });
   };
 
   formatUserDateTimeProps = (user: UserResponseDTO) => {

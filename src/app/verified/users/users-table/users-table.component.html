@@ -50,12 +50,12 @@
         <div class="flex items-center gap-1">
           <ng-container *ngIf="user.enableFlag; then disableBtnBlock; else enableBtnBlock"></ng-container>
           <ng-template #disableBtnBlock>
-            <button (click)="onDisableBtnClick(user.id)" class="text-white p-2 rounded bg-disable w-16">Disable</button>
+            <button (click)="disableUser(user.id)" class="text-white p-2 rounded bg-disable w-16">Disable</button>
           </ng-template>
           <ng-template #enableBtnBlock>
-            <button (click)="onEnableBtnClick(user.id)" class="text-white p-2 rounded bg-success w-16">Enable</button>
+            <button (click)="enableUser(user.id)" class="text-white p-2 rounded bg-success w-16">Enable</button>
           </ng-template>
-          <button (click)="onDeleteBtnClick(user.id)" class="bg-danger text-white p-2 rounded">Delete</button>
+          <button (click)="deleteUser(user.id)" class="bg-danger text-white p-2 rounded">Delete</button>
         </div>
       </td>
     </tr>

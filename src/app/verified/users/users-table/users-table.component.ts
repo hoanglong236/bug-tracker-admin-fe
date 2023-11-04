@@ -14,13 +14,13 @@ export class UsersTableComponent {
 
   constructor(private readonly manageUsersService: ManageUsersService) {}
 
-  protected onDisableBtnClick = (userId: number) => {
+  protected disableUser = (userId: number) => {
     if (confirm('Are you sure you want to disable this user?')) {
       this.manageUsersService.disableUser(userId, this.onUpdateUserSuccess);
     }
   };
 
-  protected onEnableBtnClick = (userId: number) => {
+  protected enableUser = (userId: number) => {
     if (confirm('Are you sure you want to enable this user?')) {
       this.manageUsersService.enableUser(userId, this.onUpdateUserSuccess);
     }
@@ -34,7 +34,7 @@ export class UsersTableComponent {
     );
   };
 
-  protected onDeleteBtnClick = (userId: number) => {
+  protected deleteUser = (userId: number) => {
     if (confirm('Are you sure you want to delete this user?')) {
       this.deleteUserEvent.emit(userId);
     }

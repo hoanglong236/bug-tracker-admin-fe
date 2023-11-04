@@ -15,11 +15,11 @@
         <span class="material-symbols-outlined font-normal">cloud_upload</span>
         <span>Import</span>
       </button>
-      <button
+      <a routerLink="./create"
         class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
         <span class="material-symbols-outlined font-normal">add</span>
         <span>Add project</span>
-      </button>
+      </a>
     </div>
   </div>
 
@@ -44,8 +44,9 @@
   </div>
 
   <div
-    class="mt-6 grid grid-flow-row gap-6 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-    <project-card *ngFor="let project of projects;" [project]="project"></project-card>
+    class="mt-6 grid grid-flow-row auto-rows-fr gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 text-neutral-600">
+    <project-card *ngFor="let project of projects;" [project]="project"
+      (deleteProjectEvent)="deleteProject($event)"></project-card>
   </div>
 
   <shared-paginator #paginator (nextBtnClickEvent)="goToNextPage()"

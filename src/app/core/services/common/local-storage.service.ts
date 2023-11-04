@@ -4,8 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LocalStorageService {
-  constructor() {}
-
   clear = () => {
     window.localStorage.clear();
   };

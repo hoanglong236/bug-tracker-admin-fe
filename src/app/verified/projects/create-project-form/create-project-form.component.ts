@@ -57,12 +57,12 @@ export class CreateProjectFormComponent {
     }
 
     this.manageProjectsService.createProject(
-      this.inputsToProjectRequestDTO(),
+      this.formDataToProjectRequestDTO(),
       this.onCreateProjectSuccess
     );
   };
 
-  private inputsToProjectRequestDTO = () => {
+  private formDataToProjectRequestDTO = () => {
     const formValue = this.createProjectForm.value;
     return {
       name: formValue.name!,

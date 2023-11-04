@@ -52,13 +52,13 @@ export class SignUpFormComponent {
     }
 
     this.authService.signUp(
-      this.inputsToSignUpRequestDTO(),
+      this.formDataToSignUpRequestDTO(),
       this.onSignUpSuccess,
       this.onSignUpFailure
     );
   };
 
-  private inputsToSignUpRequestDTO = () => {
+  private formDataToSignUpRequestDTO = () => {
     const formValue = this.signUpForm.value;
     return {
       name: formValue.name!,

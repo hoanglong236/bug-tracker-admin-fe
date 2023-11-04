@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-const httpOptions = {
+const HTTP_OPTIONS = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
   }),
@@ -14,18 +14,18 @@ export class SimpleHttpService {
   constructor(private readonly http: HttpClient) {}
 
   get = (url: string) => {
-    return this.http.get(url, httpOptions);
+    return this.http.get(url, HTTP_OPTIONS);
   };
 
   post = (url: string, data: any) => {
-    return this.http.post(url, data, httpOptions);
+    return this.http.post(url, data, HTTP_OPTIONS);
   };
 
   put = (url: string, data: any) => {
-    return this.http.put(url, data, httpOptions);
+    return this.http.put(url, data, HTTP_OPTIONS);
   };
 
   delete = (url: string) => {
-    return this.http.delete(url, httpOptions);
+    return this.http.delete(url, HTTP_OPTIONS);
   };
 }

@@ -101,12 +101,12 @@ export class UpdateProjectFormComponent implements OnInit {
 
     this.manageProjectsService.updateProject(
       this.project!.id,
-      this.inputsToProjectRequestDTO(),
+      this.formDataToProjectRequestDTO(),
       this.onCreateProjectSuccess
     );
   };
 
-  private inputsToProjectRequestDTO = () => {
+  private formDataToProjectRequestDTO = () => {
     const formValue = this.updateProjectForm.value;
     return {
       name: formValue.name!,

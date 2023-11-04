@@ -4,8 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class SessionStorageService {
-  constructor() {}
-
   clear = () => {
     window.sessionStorage.clear();
   };

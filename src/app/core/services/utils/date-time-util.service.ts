@@ -4,8 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class DateTimeUtilService {
-  constructor() {}
-
   formatDateString = (dateStr: string) => {
     const date = new Date(dateStr);
     const year = '' + date.getFullYear();

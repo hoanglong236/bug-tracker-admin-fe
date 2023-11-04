@@ -36,13 +36,13 @@ export class SignInFormComponent {
     }
 
     this.authService.signIn(
-      this.inputsToSignInRequestDTO(),
+      this.formDataToSignInRequestDTO(),
       this.onSignInSuccess,
       this.onSignInFailure
     );
   };
 
-  private inputsToSignInRequestDTO = () => {
+  private formDataToSignInRequestDTO = () => {
     const formValue = this.signInForm.value;
     return { email: formValue.email!, password: formValue.password! };
   };

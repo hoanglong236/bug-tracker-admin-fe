@@ -13,11 +13,12 @@ export class SignInComponent {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8)]],
   });
+  protected firstTimeSignInFormSubmit = true;
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly authService: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly authService: AuthService
   ) {}
 
   protected get emailControl() {
@@ -28,17 +29,22 @@ export class SignInComponent {
     return this.signInForm.get('password')!;
   }
 
-  protected onSubmit = () => {
+  protected onSignInFormSubmit = () => {
     if (this.signInForm.invalid) {
+      this.firstTimeSignInFormSubmit = false;
       return;
     }
 
-    const formValue = this.signInForm.value;
     this.authService.signIn(
-      { email: formValue.email!, password: formValue.password! },
+      this.inputsToSignInRequestDTO(),
       this.onSignInSuccess,
       this.onSignInFailure
     );
+  };
+
+  private inputsToSignInRequestDTO = () => {
+    const formValue = this.signInForm.value;
+    return { email: formValue.email!, password: formValue.password! };
   };
 
   private onSignInSuccess = () => {
@@ -47,6 +53,15 @@ export class SignInComponent {
 
   private onSignInFailure = (err: any) => {
     console.log(err);
-    alert('Error: Invalid credentials or password entered');
+    switch (err.status) {
+      case 0:
+        alert('Cannot connect to the server!');
+        return;
+      case 401:
+        alert('Invalid username or password!');
+        return;
+      default:
+        alert(err.error.message);
+    }
   };
 }

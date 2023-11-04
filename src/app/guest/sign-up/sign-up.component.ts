@@ -21,11 +21,12 @@ export class SignUpComponent {
       validators: matchControlsValidator('password', 'confirmPassword'),
     }
   );
+  protected firstTimeSignUpFormSubmit = true;
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly authService: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly authService: AuthService
   ) {}
 
   protected get nameControl() {
@@ -44,24 +45,26 @@ export class SignUpComponent {
     return this.signUpForm.get('confirmPassword')!;
   }
 
-  protected onSubmit = () => {
+  protected onSignUpFormSubmit = () => {
     if (this.signUpForm.invalid) {
-      alert(
-        'Please fill in all fields in the sign up form completely and accurately!'
-      );
+      this.firstTimeSignUpFormSubmit = false;
       return;
     }
 
-    const formValue = this.signUpForm.value;
     this.authService.signUp(
-      {
-        name: formValue.name!,
-        email: formValue.email!,
-        password: formValue.password!,
-      },
+      this.inputsToSignUpRequestDTO(),
       this.onSignUpSuccess,
       this.onSignUpFailure
     );
+  };
+
+  private inputsToSignUpRequestDTO = () => {
+    const formValue = this.signUpForm.value;
+    return {
+      name: formValue.name!,
+      email: formValue.email!,
+      password: formValue.password!,
+    };
   };
 
   private onSignUpSuccess = () => {
@@ -71,5 +74,10 @@ export class SignUpComponent {
 
   private onSignUpFailure = (err: any) => {
     console.log(err);
+    if (err.status === 0) {
+      alert('Cannot connect to the server!');
+    } else {
+      alert(err.error.message);
+    }
   };
 }

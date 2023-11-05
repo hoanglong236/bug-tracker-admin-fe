@@ -52,7 +52,6 @@ export class SignInFormComponent {
   };
 
   private onSignInFailure = (err: any) => {
-    console.log(err);
     switch (err.status) {
       case 0:
         alert('Cannot connect to the server!');

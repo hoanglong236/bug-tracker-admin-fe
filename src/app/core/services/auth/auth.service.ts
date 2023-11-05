@@ -17,7 +17,7 @@ export class AuthService {
   signIn = (
     params: SignInRequestDTO,
     onResolve: Function,
-    onReject: Function = console.log
+    onReject: Function
   ) => {
     this.simpleHttp.post(SIGN_IN_URL, params).subscribe({
       next: (value: any) => {
@@ -35,7 +35,7 @@ export class AuthService {
   signUp = (
     params: SignUpRequestDTO,
     onResolve: Function,
-    onReject: Function = console.log
+    onReject: Function
   ) => {
     this.simpleHttp.post(SIGN_UP_URL, params).subscribe({
       next: () => onResolve(),

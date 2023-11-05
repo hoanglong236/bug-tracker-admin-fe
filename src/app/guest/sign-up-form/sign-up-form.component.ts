@@ -73,7 +73,6 @@ export class SignUpFormComponent {
   };
 
   private onSignUpFailure = (err: any) => {
-    console.log(err);
     if (err.status === 0) {
       alert('Cannot connect to the server!');
     } else {

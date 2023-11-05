@@ -5,5 +5,6 @@ export type ProjectRequestDTO = {
   technology: string;
   lang: string;
   db: string;
+  closeFlag: boolean;
   note: string;
 };

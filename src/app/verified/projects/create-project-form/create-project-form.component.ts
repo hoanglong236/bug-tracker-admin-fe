@@ -16,6 +16,7 @@ export class CreateProjectFormComponent {
     technology: ['', [Validators.required]],
     language: ['', [Validators.required]],
     database: ['', [Validators.required]],
+    closeStatus: [false, [Validators.required]],
     note: [''],
   });
   protected firstTimeSubmit = true;
@@ -50,6 +51,10 @@ export class CreateProjectFormComponent {
     return this.createProjectForm.get('database')!;
   }
 
+  protected get closeStatusControl() {
+    return this.createProjectForm.get('closeStatus')!;
+  }
+
   protected onSubmit = () => {
     if (this.createProjectForm.invalid) {
       this.firstTimeSubmit = false;
@@ -58,7 +63,8 @@ export class CreateProjectFormComponent {
 
     this.manageProjectsService.createProject(
       this.formDataToProjectRequestDTO(),
-      this.onCreateProjectSuccess
+      this.onCreateProjectSuccess,
+      this.onCreateProjectFailure
     );
   };
 
@@ -71,12 +77,18 @@ export class CreateProjectFormComponent {
       technology: formValue.technology!,
       lang: formValue.language!,
       db: formValue.database!,
+      closeFlag: formValue.closeStatus!,
       note: formValue.note!,
     };
   };
 
   private onCreateProjectSuccess = () => {
     this.router.navigate(['/verified/projects']);
+  };
+
+  private onCreateProjectFailure = (err: any) => {
+    console.log(err);
+    alert(err.error.message);
   };
 
   protected onClearBtnClick = () => {

@@ -20,6 +20,7 @@ export class UpdateProjectFormComponent implements OnInit {
     technology: ['', [Validators.required]],
     language: ['', [Validators.required]],
     database: ['', [Validators.required]],
+    closeStatus: [false, [Validators.required]],
     note: [''],
   });
   protected firstTimeSubmit = true;
@@ -60,12 +61,14 @@ export class UpdateProjectFormComponent implements OnInit {
       technology: this.project.technology,
       database: this.project.db,
       language: this.project.lang,
+      closeStatus: this.project.closeFlag,
       note: this.project.note,
     });
   };
 
   private onGetProjectFailure = (err: any) => {
-    alert('Project not found!');
+    console.log(err);
+    alert(err.error.message);
     this.router.navigate(['/verified/projects']);
   };
 
@@ -89,6 +92,10 @@ export class UpdateProjectFormComponent implements OnInit {
     return this.updateProjectForm.get('language')!;
   }
 
+  protected get closeStatusControl() {
+    return this.updateProjectForm.get('closeStatus')!;
+  }
+
   protected get databaseControl() {
     return this.updateProjectForm.get('database')!;
   }
@@ -100,9 +107,10 @@ export class UpdateProjectFormComponent implements OnInit {
     }
 
     this.manageProjectsService.updateProject(
-      this.project!.id,
+      this.project.id,
       this.formDataToProjectRequestDTO(),
-      this.onCreateProjectSuccess
+      this.onUpdateProjectSuccess,
+      this.onUpdateProjectFailure
     );
   };
 
@@ -115,12 +123,18 @@ export class UpdateProjectFormComponent implements OnInit {
       technology: formValue.technology!,
       lang: formValue.language!,
       db: formValue.database!,
+      closeFlag: formValue.closeStatus!,
       note: formValue.note!,
     };
   };
 
-  private onCreateProjectSuccess = () => {
+  private onUpdateProjectSuccess = () => {
     this.router.navigate(['/verified/projects']);
+  };
+
+  private onUpdateProjectFailure = (err: any) => {
+    console.log(err);
+    alert(err.error.message);
   };
 
   protected onResetBtnClick = () => {

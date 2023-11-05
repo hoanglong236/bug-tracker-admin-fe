@@ -6,6 +6,7 @@ import {
   CREATE_PROJECT_URL,
   DELETE_PROJECT_URL,
   FILTER_PROJECTS_URL,
+  GET_PROJECT_DETAILS_URL,
   GET_PROJECT_URL,
   UPDATE_PROJECT_URL,
 } from '../api-urls';
@@ -35,17 +36,6 @@ export class ManageProjectsService {
     });
   };
 
-  createProject = (
-    params: ProjectRequestDTO,
-    onResolve: Function,
-    onReject: Function = console.log
-  ) => {
-    this.simpleHttp.post(CREATE_PROJECT_URL, params).subscribe({
-      next: (value) => onResolve(value),
-      error: (err) => onReject(err),
-    });
-  };
-
   getProject = (
     projectId: number,
     onResolve: Function,
@@ -57,6 +47,17 @@ export class ManageProjectsService {
         next: (value) => onResolve(value),
         error: (err) => onReject(err),
       });
+  };
+
+  createProject = (
+    params: ProjectRequestDTO,
+    onResolve: Function,
+    onReject: Function = console.log
+  ) => {
+    this.simpleHttp.post(CREATE_PROJECT_URL, params).subscribe({
+      next: (value) => onResolve(value),
+      error: (err) => onReject(err),
+    });
   };
 
   updateProject = (
@@ -80,6 +81,19 @@ export class ManageProjectsService {
   ) => {
     this.simpleHttp
       .delete(DELETE_PROJECT_URL.replace(':id', `${projectId}`))
+      .subscribe({
+        next: (value) => onResolve(value),
+        error: (err) => onReject(err),
+      });
+  };
+
+  getProjectDetails = (
+    projectId: number,
+    onResolve: Function,
+    onReject: Function = console.log
+  ) => {
+    this.simpleHttp
+      .get(GET_PROJECT_DETAILS_URL.replace(':id', `${projectId}`))
       .subscribe({
         next: (value) => onResolve(value),
         error: (err) => onReject(err),

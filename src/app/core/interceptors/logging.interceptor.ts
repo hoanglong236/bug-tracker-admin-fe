@@ -22,13 +22,13 @@ export class LoggingInterceptor implements HttpInterceptor {
         next: (event) =>
           (status = event instanceof HttpResponse ? 'succeeded' : ''),
         error: (err) => {
-          console.error(err);
+          console.log(err);
           status = 'failed';
         },
       }),
       finalize(() => {
         const elapsed = Date.now() - started;
-        const msg = `${request.method} "${request.urlWithParams}" ${status} in ${elapsed} ms.`;
+        const msg = `${request.method}: "${request.urlWithParams}" ${status} in ${elapsed} ms.`;
         console.log(msg);
       })
     );

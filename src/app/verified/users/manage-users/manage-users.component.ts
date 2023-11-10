@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FilterUsersRequestDTO, UserResponseDTO } from 'src/app/core/dto';
-import { ManageUsersService } from 'src/app/core/services/manage-users.service';
+import { UserService } from 'src/app/core/services/user.service';
 import { PaginatorComponent } from 'src/app/shared/components/paginator/paginator.component';
 
 @Component({
@@ -15,7 +15,7 @@ export class ManageUsersComponent implements AfterViewInit {
   protected totalUsers: number = 0;
   private readonly pageSize: number = 12;
 
-  constructor(private readonly manageUsersService: ManageUsersService) {}
+  constructor(private readonly userService: UserService) {}
 
   ngAfterViewInit(): void {
     this.filterUsers({
@@ -39,7 +39,7 @@ export class ManageUsersComponent implements AfterViewInit {
   };
 
   private filterUsers = (params: FilterUsersRequestDTO) => {
-    this.manageUsersService.filterUsers(params, this.onFilterUsersSuccess);
+    this.userService.filterUsers(params, this.onFilterUsersSuccess, () => {});
   };
 
   private onFilterUsersSuccess = (data: any) => {
@@ -47,14 +47,18 @@ export class ManageUsersComponent implements AfterViewInit {
     this.paginator.currentPage = data.number;
 
     this.users = data.content.map((user: UserResponseDTO) =>
-      this.manageUsersService.formatUserDateTimeProps(user)
+      this.userService.formatUserDateTimeProps(user)
     );
 
     this.totalUsers = data.totalElements;
   };
 
   protected deleteUser = (userId: number) => {
-    this.manageUsersService.deleteUser(userId, this.onDeleteUserSuccess);
+    this.userService.deleteUser(
+      userId,
+      this.onDeleteUserSuccess,
+      this.onDeleteUserFailure
+    );
   };
 
   private onDeleteUserSuccess = () => {
@@ -67,5 +71,9 @@ export class ManageUsersComponent implements AfterViewInit {
       pageNumber: pageNumber,
       pageSize: this.pageSize,
     });
+  };
+
+  private onDeleteUserFailure = (err: any) => {
+    alert(err.error.message);
   };
 }

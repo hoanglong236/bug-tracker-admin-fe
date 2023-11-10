@@ -13,7 +13,7 @@ import { FilterUsersRequestDTO, UserResponseDTO } from '../dto';
 @Injectable({
   providedIn: 'root',
 })
-export class ManageUsersService {
+export class UserService {
   constructor(
     private readonly simpleHttp: SimpleHttpService,
     private readonly dateTimeUtil: DateTimeUtilService
@@ -21,51 +21,39 @@ export class ManageUsersService {
 
   filterUsers = (
     params: FilterUsersRequestDTO,
-    onResolve: Function,
-    onReject: Function = console.log
+    onSuccess: Function,
+    onError: Function
   ) => {
     this.simpleHttp.post(FILTER_USERS_URL, params).subscribe({
-      next: (value) => onResolve(value),
-      error: (err) => onReject(err),
+      next: (value) => onSuccess(value),
+      error: (err) => onError(err),
     });
   };
 
-  disableUser = (
-    userId: number,
-    onResolve: Function,
-    onReject: Function = console.log
-  ) => {
+  disableUser = (userId: number, onSuccess: Function, onError: Function) => {
     this.simpleHttp
       .post(DISABLE_USER_URL.replace(':id', `${userId}`), {})
       .subscribe({
-        next: (value) => onResolve(value),
-        error: (err) => onReject(err),
+        next: (value) => onSuccess(value),
+        error: (err) => onError(err),
       });
   };
 
-  enableUser = (
-    userId: number,
-    onResolve: Function,
-    onReject: Function = console.log
-  ) => {
+  enableUser = (userId: number, onSuccess: Function, onError: Function) => {
     this.simpleHttp
       .post(ENABLE_USER_URL.replace(':id', `${userId}`), {})
       .subscribe({
-        next: (value) => onResolve(value),
-        error: (err) => onReject(err),
+        next: (value) => onSuccess(value),
+        error: (err) => onError(err),
       });
   };
 
-  deleteUser = (
-    userId: number,
-    onResolve: Function,
-    onReject: Function = console.log
-  ) => {
+  deleteUser = (userId: number, onSuccess: Function, onError: Function) => {
     this.simpleHttp
       .delete(DELETE_USER_URL.replace(':id', `${userId}`))
       .subscribe({
-        next: (value) => onResolve(value),
-        error: (err) => onReject(err),
+        next: (value) => onSuccess(value),
+        error: (err) => onError(err),
       });
   };
 

@@ -16,8 +16,8 @@ export class AuthService {
 
   signIn = (
     params: SignInRequestDTO,
-    onResolve: Function,
-    onReject: Function
+    onSuccess: Function,
+    onError: Function
   ) => {
     this.simpleHttp.post(SIGN_IN_URL, params).subscribe({
       next: (value: any) => {
@@ -26,26 +26,26 @@ export class AuthService {
           value.authorizationToken
         );
 
-        onResolve();
+        onSuccess();
       },
-      error: (err) => onReject(err),
+      error: (err) => onError(err),
     });
   };
 
   signUp = (
     params: SignUpRequestDTO,
-    onResolve: Function,
-    onReject: Function
+    onSuccess: Function,
+    onError: Function
   ) => {
     this.simpleHttp.post(SIGN_UP_URL, params).subscribe({
-      next: () => onResolve(),
-      error: (err) => onReject(err),
+      next: () => onSuccess(),
+      error: (err) => onError(err),
     });
   };
 
-  signOut = (onResolve: Function) => {
+  signOut = (onSuccess: Function) => {
     this.authStorageService.deleteAuthorizationToken();
-    onResolve();
+    onSuccess();
   };
 
   isAuthenticated = () => {

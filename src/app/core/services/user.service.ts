@@ -56,12 +56,4 @@ export class UserService {
         error: (err) => onError(err),
       });
   };
-
-  formatUserDateTimeProps = (user: UserResponseDTO) => {
-    return {
-      ...user,
-      createdAt: this.dateTimeUtil.formatDateString(user.createdAt),
-      updatedAt: this.dateTimeUtil.formatDateString(user.updatedAt),
-    };
-  };
 }

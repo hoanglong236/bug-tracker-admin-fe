@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FilterUsersRequestDTO, UserResponseDTO } from 'src/app/core/dto';
+import { PageModel } from 'src/app/core/models';
 import { UserService } from 'src/app/core/services/user.service';
+import { DateTimeUtilService } from 'src/app/core/services/utils/date-time-util.service';
 import { PaginatorComponent } from 'src/app/shared/components/paginator/paginator.component';
 
 @Component({
@@ -13,28 +15,20 @@ export class ManageUsersComponent implements AfterViewInit {
 
   protected users: UserResponseDTO[] = [];
   protected totalUsers: number = 0;
-  private readonly pageSize: number = 12;
 
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly dateTimeUtil: DateTimeUtilService
+  ) {}
 
   ngAfterViewInit(): void {
-    this.filterUsers({
-      pageNumber: 0,
-      pageSize: this.pageSize,
-    });
+    this.filterUsers({ pageNumber: 0, pageSize: 12 });
   }
 
-  protected goToNextPage = () => {
+  protected goToXPage = (pageModel: PageModel) => {
     this.filterUsers({
-      pageNumber: this.paginator.currentPage + 1,
-      pageSize: this.pageSize,
-    });
-  };
-
-  protected goToPreviousPage = () => {
-    this.filterUsers({
-      pageNumber: this.paginator.currentPage - 1,
-      pageSize: this.pageSize,
+      pageNumber: pageModel.pageNumber,
+      pageSize: pageModel.pageSize,
     });
   };
 
@@ -43,11 +37,14 @@ export class ManageUsersComponent implements AfterViewInit {
   };
 
   private onFilterUsersSuccess = (data: any) => {
-    this.paginator.totalPages = data.totalPages;
-    this.paginator.currentPage = data.number;
+    this.paginator.pageModel = new PageModel(
+      data.number,
+      data.totalPages,
+      data.size
+    );
 
     this.users = data.content.map((user: UserResponseDTO) =>
-      this.userService.formatUserDateTimeProps(user)
+      this.dateTimeUtil.formatDateTimeProps(user)
     );
 
     this.totalUsers = data.totalElements;
@@ -62,14 +59,14 @@ export class ManageUsersComponent implements AfterViewInit {
   };
 
   private onDeleteUserSuccess = () => {
-    let pageNumber = this.paginator.currentPage;
-    if (this.users.length === 1 && this.paginator.isLastPage()) {
-      pageNumber--;
+    let pageModel = { ...this.paginator.pageModel };
+    if (this.users.length === 1 && pageModel.isLastPage()) {
+      pageModel = pageModel.getPreviousPage();
     }
 
     this.filterUsers({
-      pageNumber: pageNumber,
-      pageSize: this.pageSize,
+      pageNumber: pageModel.pageNumber,
+      pageSize: pageModel.pageSize,
     });
   };
 

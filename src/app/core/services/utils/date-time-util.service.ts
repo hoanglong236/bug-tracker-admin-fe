@@ -4,7 +4,18 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class DateTimeUtilService {
-  formatDateString = (dateStr: string) => {
+  formatDateTimeProps = (obj: any) => {
+    let newObj = obj;
+    if (newObj.createdAt) {
+      newObj.createdAt = this.formatDateTimeString(newObj.createdAt);
+    }
+    if (newObj.updatedAt) {
+      newObj.updatedAt = this.formatDateTimeString(newObj.updatedAt);
+    }
+    return newObj;
+  };
+
+  private formatDateTimeString = (dateStr: string) => {
     const date = new Date(dateStr);
     const year = '' + date.getFullYear();
     let month = '' + (date.getMonth() + 1);

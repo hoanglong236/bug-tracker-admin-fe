@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { PageModel } from 'src/app/core/models';
 
 @Component({
   selector: 'shared-paginator',
@@ -6,29 +7,19 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./paginator.component.scss'],
 })
 export class PaginatorComponent {
-  @Input() totalPages: number = 0;
-  @Input() currentPage: number = 0;
+  @Input() pageModel: PageModel = new PageModel();
 
-  @Output() previousBtnClickEvent = new EventEmitter();
-  @Output() nextBtnClickEvent = new EventEmitter();
+  @Output() goToXPageEvent = new EventEmitter<PageModel>();
 
   protected onPreviousBtnClick = () => {
-    if (!this.isFirstPage()) {
-      this.previousBtnClickEvent.emit();
+    if (!this.pageModel.isFirstPage()) {
+      this.goToXPageEvent.emit(this.pageModel.getPreviousPage());
     }
-  };
-
-  public isFirstPage = () => {
-    return this.currentPage === 0;
   };
 
   protected onNextBtnClick = () => {
-    if (!this.isLastPage()) {
-      this.nextBtnClickEvent.emit();
+    if (!this.pageModel.isLastPage()) {
+      this.goToXPageEvent.emit(this.pageModel.getNextPage());
     }
-  };
-
-  public isLastPage = () => {
-    return this.currentPage === this.totalPages - 1;
   };
 }

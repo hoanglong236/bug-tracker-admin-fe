@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UserResponseDTO } from 'src/app/core/dto';
 import { UserService } from 'src/app/core/services/user.service';
+import { DateTimeUtilService } from 'src/app/core/services/utils/date-time-util.service';
 
 @Component({
   selector: 'users-table',
@@ -12,7 +13,10 @@ export class UsersTableComponent {
 
   @Output() deleteUserEvent = new EventEmitter<number>();
 
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly dateTimeUtil: DateTimeUtilService
+  ) {}
 
   protected disableUser = (userId: number) => {
     if (confirm('Are you sure you want to disable this user?')) {
@@ -37,7 +41,7 @@ export class UsersTableComponent {
   private onUpdateUserSuccess = (updatedUser: UserResponseDTO) => {
     this.users = this.users.map((user) =>
       user.id === updatedUser.id
-        ? this.userService.formatUserDateTimeProps(updatedUser)
+        ? this.dateTimeUtil.formatDateTimeProps(updatedUser)
         : user
     );
   };

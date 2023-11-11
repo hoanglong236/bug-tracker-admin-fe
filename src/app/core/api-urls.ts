@@ -16,3 +16,4 @@ export const GET_PROJECT_URL = BASE_PROJECTS_URL + '/:id';
 export const UPDATE_PROJECT_URL = BASE_PROJECTS_URL + '/update/:id';
 export const DELETE_PROJECT_URL = BASE_PROJECTS_URL + '/delete/:id';
 export const GET_PROJECT_DETAILS_URL = BASE_PROJECTS_URL + '/details/:id';
+export const ADD_MEMBER_URL = GET_PROJECT_DETAILS_URL + '/add-member/:email';

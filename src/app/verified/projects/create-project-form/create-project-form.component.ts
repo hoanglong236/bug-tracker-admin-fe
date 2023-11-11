@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ManageProjectsService } from 'src/app/core/services/manage-projects.service';
+import { ProjectService } from 'src/app/core/services/project.service';
 
 @Component({
   selector: 'create-project-form',
@@ -24,7 +24,7 @@ export class CreateProjectFormComponent {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,
-    private readonly manageProjectsService: ManageProjectsService
+    private readonly projectService: ProjectService
   ) {}
 
   protected get nameControl() {
@@ -61,7 +61,7 @@ export class CreateProjectFormComponent {
       return;
     }
 
-    this.manageProjectsService.createProject(
+    this.projectService.createProject(
       this.formDataToProjectRequestDTO(),
       this.onCreateProjectSuccess,
       this.onCreateProjectFailure
@@ -87,7 +87,6 @@ export class CreateProjectFormComponent {
   };
 
   private onCreateProjectFailure = (err: any) => {
-    console.log(err);
     alert(err.error.message);
   };
 

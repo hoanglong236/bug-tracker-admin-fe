@@ -7,3 +7,4 @@ export * from './user-response.dto';
 export * from './filter-projects-request.dto';
 export * from './project-request.dto';
 export * from './project-response.dto';
+export * from './member-response.dto';

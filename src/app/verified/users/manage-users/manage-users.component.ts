@@ -60,7 +60,11 @@ export class ManageUsersComponent implements AfterViewInit {
 
   private onDeleteUserSuccess = () => {
     let pageModel = { ...this.paginator.pageModel };
-    if (this.users.length === 1 && pageModel.isLastPage()) {
+    if (
+      !pageModel.isFirstPage() &&
+      pageModel.isLastPage() &&
+      this.users.length === 1
+    ) {
       pageModel = pageModel.getPreviousPage();
     }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectResponseDTO } from 'src/app/core/dto';
-import { ManageProjectsService } from 'src/app/core/services/manage-projects.service';
+import { ProjectService } from 'src/app/core/services/project.service';
 
 @Component({
   selector: 'update-project-form',
@@ -29,7 +29,7 @@ export class UpdateProjectFormComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    private readonly manageProjectsService: ManageProjectsService
+    private readonly projectService: ProjectService
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +39,7 @@ export class UpdateProjectFormComponent implements OnInit {
       this.router.navigate(['/verified/projects']);
       return;
     }
-    this.manageProjectsService.getProject(
+    this.projectService.getProject(
       projectId,
       this.onGetProjectSuccess,
       this.onGetProjectFailure
@@ -67,7 +67,6 @@ export class UpdateProjectFormComponent implements OnInit {
   };
 
   private onGetProjectFailure = (err: any) => {
-    console.log(err);
     alert(err.error.message);
     this.router.navigate(['/verified/projects']);
   };
@@ -106,7 +105,7 @@ export class UpdateProjectFormComponent implements OnInit {
       return;
     }
 
-    this.manageProjectsService.updateProject(
+    this.projectService.updateProject(
       this.project.id,
       this.formDataToProjectRequestDTO(),
       this.onUpdateProjectSuccess,
@@ -133,7 +132,6 @@ export class UpdateProjectFormComponent implements OnInit {
   };
 
   private onUpdateProjectFailure = (err: any) => {
-    console.log(err);
     alert(err.error.message);
   };
 

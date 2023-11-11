@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class DateTimeUtilService {
   formatDateTimeProps = (obj: any) => {
-    let newObj = obj;
+    let newObj = { ...obj };
     if (newObj.createdAt) {
       newObj.createdAt = this.formatDateTimeString(newObj.createdAt);
     }

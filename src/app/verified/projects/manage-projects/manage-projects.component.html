@@ -25,11 +25,10 @@
   <projects-filter-form></projects-filter-form>
 
   <div
-    class="mt-6 grid grid-flow-row auto-rows-fr gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 text-neutral-600">
+    class="mt-8 grid grid-flow-row auto-rows-fr gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 text-neutral-600">
     <project-card *ngFor="let project of projects;" [project]="project"
       (deleteProjectEvent)="deleteProject($event)"></project-card>
   </div>
 
-  <shared-paginator #paginator (nextBtnClickEvent)="goToNextPage()"
-    (previousBtnClickEvent)="goToPreviousPage()"></shared-paginator>
+  <shared-paginator #paginator (goToXPageEvent)="goToXPage($event)"></shared-paginator>
 </section>

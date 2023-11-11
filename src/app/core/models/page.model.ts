@@ -14,7 +14,7 @@ export class PageModel {
   }
 
   isLastPage = () => {
-    return this.pageNumber === this.totalPages - 1;
+    return this.pageNumber === this.totalPages - 1 || this.totalPages === 0;
   };
 
   isFirstPage = () => {
@@ -22,14 +22,10 @@ export class PageModel {
   };
 
   getNextPage = () => {
-    return this.cloneByPageNumber(this.pageNumber + 1);
+    return new PageModel(this.pageNumber + 1, this.totalPages, this.pageSize);
   };
 
   getPreviousPage = () => {
-    return this.cloneByPageNumber(this.pageNumber - 1);
-  };
-
-  private cloneByPageNumber = (pageNumber: number) => {
-    return new PageModel(pageNumber, this.totalPages, this.pageSize);
+    return new PageModel(this.pageNumber - 1, this.totalPages, this.pageSize);
   };
 }

@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FilterProjectsRequestDTO, ProjectResponseDTO } from 'src/app/core/dto';
-import { ManageProjectsService } from 'src/app/core/services/manage-projects.service';
+import { PageModel } from 'src/app/core/models';
+import { ProjectService } from 'src/app/core/services/project.service';
+import { DateTimeUtilService } from 'src/app/core/services/utils/date-time-util.service';
 import { PaginatorComponent } from 'src/app/shared/components/paginator/paginator.component';
 
 @Component({
@@ -13,65 +15,70 @@ export class ManageProjectsComponent implements AfterViewInit {
 
   protected projects: ProjectResponseDTO[] = [];
   protected totalProjects: number = 0;
-  private readonly pageSize: number = 8;
 
-  constructor(private readonly manageProjectsService: ManageProjectsService) {}
+  constructor(
+    private readonly projectService: ProjectService,
+    private readonly dateTimeUtil: DateTimeUtilService
+  ) {}
 
   ngAfterViewInit(): void {
-    this.filterProjects({
-      pageNumber: 0,
-      pageSize: this.pageSize,
-    });
+    this.filterProjects({ pageNumber: 0, pageSize: 8 });
   }
 
-  protected goToNextPage = () => {
+  protected goToXPage = (pageModel: PageModel) => {
     this.filterProjects({
-      pageNumber: this.paginator.currentPage + 1,
-      pageSize: this.pageSize,
-    });
-  };
-
-  protected goToPreviousPage = () => {
-    this.filterProjects({
-      pageNumber: this.paginator.currentPage - 1,
-      pageSize: this.pageSize,
+      pageNumber: pageModel.pageNumber,
+      pageSize: pageModel.pageSize,
     });
   };
 
   private filterProjects = (params: FilterProjectsRequestDTO) => {
-    this.manageProjectsService.filterProjects(
+    this.projectService.filterProjects(
       params,
-      this.onFilterProjectsSuccess
+      this.onFilterProjectsSuccess,
+      () => {}
     );
   };
 
   private onFilterProjectsSuccess = (data: any) => {
-    this.paginator.totalPages = data.totalPages;
-    this.paginator.currentPage = data.number;
+    this.paginator.pageModel = new PageModel(
+      data.number,
+      data.totalPages,
+      data.size
+    );
 
     this.projects = data.content.map((project: ProjectResponseDTO) =>
-      this.manageProjectsService.formatProjectDateTimeProps(project)
+      this.dateTimeUtil.formatDateTimeProps(project)
     );
 
     this.totalProjects = data.totalElements;
   };
 
   protected deleteProject = (projectId: number) => {
-    this.manageProjectsService.deleteProject(
+    this.projectService.deleteProject(
       projectId,
-      this.onDeleteProjectSuccess
+      this.onDeleteProjectSuccess,
+      this.onDeleteProjectFailure
     );
   };
 
   private onDeleteProjectSuccess = () => {
-    let pageNumber = this.paginator.currentPage;
-    if (this.projects.length === 1 && this.paginator.isLastPage()) {
-      pageNumber--;
+    let pageModel = { ...this.paginator.pageModel };
+    if (
+      !pageModel.isFirstPage() &&
+      pageModel.isLastPage() &&
+      this.projects.length === 1
+    ) {
+      pageModel = pageModel.getPreviousPage();
     }
 
     this.filterProjects({
-      pageNumber: pageNumber,
-      pageSize: this.pageSize,
+      pageNumber: pageModel.pageNumber,
+      pageSize: pageModel.pageSize,
     });
+  };
+
+  private onDeleteProjectFailure = (err: any) => {
+    alert(err.error.message);
   };
 }

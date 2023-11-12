@@ -42,12 +42,12 @@ export class UpdateProjectFormComponent implements OnInit {
     this.projectService.getProject(
       projectId,
       this.onGetProjectSuccess,
-      this.onGetProjectFailure
+      this.onGetProjectError
     );
   }
 
-  private onGetProjectSuccess = (data: ProjectResponseDTO) => {
-    this.project = data;
+  private onGetProjectSuccess = (value: ProjectResponseDTO) => {
+    this.project = value;
     this.fillFormData();
 
     this.loading = false;
@@ -66,7 +66,7 @@ export class UpdateProjectFormComponent implements OnInit {
     });
   };
 
-  private onGetProjectFailure = (err: any) => {
+  private onGetProjectError = (err: any) => {
     alert(err.error.message);
     this.router.navigate(['/verified/projects']);
   };
@@ -107,13 +107,13 @@ export class UpdateProjectFormComponent implements OnInit {
 
     this.projectService.updateProject(
       this.project.id,
-      this.formDataToProjectRequestDTO(),
+      this.getProjectRequestDTO(),
       this.onUpdateProjectSuccess,
-      this.onUpdateProjectFailure
+      this.onUpdateProjectError
     );
   };
 
-  private formDataToProjectRequestDTO = () => {
+  private getProjectRequestDTO = () => {
     const formValue = this.updateProjectForm.value;
     return {
       name: formValue.name!,
@@ -131,7 +131,7 @@ export class UpdateProjectFormComponent implements OnInit {
     this.router.navigate(['/verified/projects']);
   };
 
-  private onUpdateProjectFailure = (err: any) => {
+  private onUpdateProjectError = (err: any) => {
     alert(err.error.message);
   };
 

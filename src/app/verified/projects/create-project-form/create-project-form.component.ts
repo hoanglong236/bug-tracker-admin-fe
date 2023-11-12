@@ -62,13 +62,13 @@ export class CreateProjectFormComponent {
     }
 
     this.projectService.createProject(
-      this.formDataToProjectRequestDTO(),
+      this.getProjectRequestDTO(),
       this.onCreateProjectSuccess,
-      this.onCreateProjectFailure
+      this.onCreateProjectError
     );
   };
 
-  private formDataToProjectRequestDTO = () => {
+  private getProjectRequestDTO = () => {
     const formValue = this.createProjectForm.value;
     return {
       name: formValue.name!,
@@ -86,7 +86,7 @@ export class CreateProjectFormComponent {
     this.router.navigate(['/verified/projects']);
   };
 
-  private onCreateProjectFailure = (err: any) => {
+  private onCreateProjectError = (err: any) => {
     alert(err.error.message);
   };
 

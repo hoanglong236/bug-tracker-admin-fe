@@ -36,25 +36,25 @@ export class ManageUsersComponent implements AfterViewInit {
     this.userService.filterUsers(params, this.onFilterUsersSuccess, () => {});
   };
 
-  private onFilterUsersSuccess = (data: any) => {
+  private onFilterUsersSuccess = (value: any) => {
     this.paginator.pageModel = new PageModel(
-      data.number,
-      data.totalPages,
-      data.size
+      value.number,
+      value.totalPages,
+      value.size
     );
 
-    this.users = data.content.map((user: UserResponseDTO) =>
+    this.users = value.content.map((user: UserResponseDTO) =>
       this.dateTimeUtil.formatDateTimeProps(user)
     );
 
-    this.totalUsers = data.totalElements;
+    this.totalUsers = value.totalElements;
   };
 
   protected deleteUser = (userId: number) => {
     this.userService.deleteUser(
       userId,
       this.onDeleteUserSuccess,
-      this.onDeleteUserFailure
+      this.onDeleteUserError
     );
   };
 
@@ -74,7 +74,7 @@ export class ManageUsersComponent implements AfterViewInit {
     });
   };
 
-  private onDeleteUserFailure = (err: any) => {
+  private onDeleteUserError = (err: any) => {
     alert(err.error.message);
   };
 }

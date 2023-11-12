@@ -52,13 +52,13 @@ export class SignUpFormComponent {
     }
 
     this.authService.signUp(
-      this.formDataToSignUpRequestDTO(),
+      this.getSignUpRequestDTO(),
       this.onSignUpSuccess,
-      this.onSignUpFailure
+      this.onSignUpError
     );
   };
 
-  private formDataToSignUpRequestDTO = () => {
+  private getSignUpRequestDTO = () => {
     const formValue = this.signUpForm.value;
     return {
       name: formValue.name!,
@@ -72,7 +72,7 @@ export class SignUpFormComponent {
     this.router.navigate(['/guest']);
   };
 
-  private onSignUpFailure = (err: any) => {
+  private onSignUpError = (err: any) => {
     if (err.status === 0) {
       alert('Cannot connect to the server!');
     } else {

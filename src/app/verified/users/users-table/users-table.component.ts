@@ -23,7 +23,7 @@ export class UsersTableComponent {
       this.userService.disableUser(
         userId,
         this.onUpdateUserSuccess,
-        this.onUpdateUserFailure
+        this.onUpdateUserError
       );
     }
   };
@@ -33,20 +33,18 @@ export class UsersTableComponent {
       this.userService.enableUser(
         userId,
         this.onUpdateUserSuccess,
-        this.onUpdateUserFailure
+        this.onUpdateUserError
       );
     }
   };
 
-  private onUpdateUserSuccess = (updatedUser: UserResponseDTO) => {
+  private onUpdateUserSuccess = (value: UserResponseDTO) => {
     this.users = this.users.map((user) =>
-      user.id === updatedUser.id
-        ? this.dateTimeUtil.formatDateTimeProps(updatedUser)
-        : user
+      user.id === value.id ? this.dateTimeUtil.formatDateTimeProps(value) : user
     );
   };
 
-  private onUpdateUserFailure = (err: any) => {
+  private onUpdateUserError = (err: any) => {
     alert(err.error.message);
   };
 

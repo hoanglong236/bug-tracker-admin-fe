@@ -36,13 +36,13 @@ export class SignInFormComponent {
     }
 
     this.authService.signIn(
-      this.formDataToSignInRequestDTO(),
+      this.getSignInRequestDTO(),
       this.onSignInSuccess,
-      this.onSignInFailure
+      this.onSignInError
     );
   };
 
-  private formDataToSignInRequestDTO = () => {
+  private getSignInRequestDTO = () => {
     const formValue = this.signInForm.value;
     return { email: formValue.email!, password: formValue.password! };
   };
@@ -51,7 +51,7 @@ export class SignInFormComponent {
     this.router.navigate(['/verified']);
   };
 
-  private onSignInFailure = (err: any) => {
+  private onSignInError = (err: any) => {
     switch (err.status) {
       case 0:
         alert('Cannot connect to the server!');

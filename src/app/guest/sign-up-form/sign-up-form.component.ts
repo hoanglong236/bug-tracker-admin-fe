@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { matchControlsValidator } from './match-controls.validator';
+import { SignUpRequestDTO } from 'src/app/core/dto';
 
 @Component({
   selector: 'sign-up-form',
@@ -58,12 +59,12 @@ export class SignUpFormComponent {
     );
   };
 
-  private getSignUpRequestDTO = () => {
+  private getSignUpRequestDTO = (): SignUpRequestDTO => {
     const formValue = this.signUpForm.value;
     return {
-      name: formValue.name!,
-      email: formValue.email!,
-      password: formValue.password!,
+      name: formValue.name ?? '',
+      email: formValue.email ?? '',
+      password: formValue.password ?? '',
     };
   };
 

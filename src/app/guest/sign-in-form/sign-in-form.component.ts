@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SignInRequestDTO } from 'src/app/core/dto';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
@@ -42,9 +43,9 @@ export class SignInFormComponent {
     );
   };
 
-  private getSignInRequestDTO = () => {
+  private getSignInRequestDTO = (): SignInRequestDTO => {
     const formValue = this.signInForm.value;
-    return { email: formValue.email!, password: formValue.password! };
+    return { email: formValue.email ?? '', password: formValue.password ?? '' };
   };
 
   private onSignInSuccess = () => {

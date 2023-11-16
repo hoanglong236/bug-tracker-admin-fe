@@ -6,10 +6,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./header-nav.component.scss'],
 })
 export class HeaderNavComponent {
-  @Input() targetToggleId: string = 'targetToggleId';
-  @Output() toggleEvent = new EventEmitter();
+  @Input() menuToggleTargetId: string = 'targetToggleId';
+  @Output() menuToggleEvent = new EventEmitter();
 
   protected onMenuBtnClick = () => {
-    this.toggleEvent.emit();
+    this.menuToggleEvent.emit();
   };
 }

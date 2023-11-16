@@ -11,7 +11,7 @@ import { PaginatorComponent } from 'src/app/shared/components/paginator/paginato
   styleUrls: ['./manage-projects.component.scss'],
 })
 export class ManageProjectsComponent implements AfterViewInit {
-  @ViewChild('paginator') private paginator!: PaginatorComponent;
+  @ViewChild(PaginatorComponent) private paginator!: PaginatorComponent;
 
   protected projects: ProjectResponseDTO[] = [];
   protected totalProjects: number = 0;
@@ -40,25 +40,25 @@ export class ManageProjectsComponent implements AfterViewInit {
     );
   };
 
-  private onFilterProjectsSuccess = (data: any) => {
+  private onFilterProjectsSuccess = (value: any) => {
     this.paginator.pageModel = new PageModel(
-      data.number,
-      data.totalPages,
-      data.size
+      value.number,
+      value.totalPages,
+      value.size
     );
 
-    this.projects = data.content.map((project: ProjectResponseDTO) =>
+    this.projects = value.content.map((project: ProjectResponseDTO) =>
       this.dateTimeUtil.formatDateTimeProps(project)
     );
 
-    this.totalProjects = data.totalElements;
+    this.totalProjects = value.totalElements;
   };
 
   protected deleteProject = (projectId: number) => {
     this.projectService.deleteProject(
       projectId,
       this.onDeleteProjectSuccess,
-      this.onDeleteProjectFailure
+      this.onDeleteProjectError
     );
   };
 
@@ -78,7 +78,7 @@ export class ManageProjectsComponent implements AfterViewInit {
     });
   };
 
-  private onDeleteProjectFailure = (err: any) => {
+  private onDeleteProjectError = (err: any) => {
     alert(err.error.message);
   };
 }

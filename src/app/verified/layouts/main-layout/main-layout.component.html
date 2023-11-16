@@ -1,4 +1,4 @@
-<layout-header-nav [targetToggleId]="'sidenav-toggle'" (toggleEvent)="toggleSideBar()"
+<layout-header-nav [menuToggleTargetId]="'sidenav-toggle'" (menuToggleEvent)="toggleSideBar()"
   class="w-full fixed top-0 z-10"></layout-header-nav>
 
 <div class="layout-container">
@@ -15,5 +15,7 @@
     </div>
   </aside>
 
-  <router-outlet></router-outlet>
+  <div class="p-4 sm:ml-64">
+    <router-outlet></router-outlet>
+  </div>
 </div>

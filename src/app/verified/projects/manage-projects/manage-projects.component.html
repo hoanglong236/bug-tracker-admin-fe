@@ -1,4 +1,4 @@
-<section class="container px-4 mx-auto">
+<section class="mt-14 mx-auto px-4 container">
   <div class="sm:flex items-center justify-between">
     <div>
       <div class="flex items-center gap-x-3">
@@ -30,5 +30,5 @@
       (deleteProjectEvent)="deleteProject($event)"></project-card>
   </div>
 
-  <shared-paginator #paginator (goToXPageEvent)="goToXPage($event)"></shared-paginator>
+  <shared-paginator (goToXPageEvent)="goToXPage($event)"></shared-paginator>
 </section>

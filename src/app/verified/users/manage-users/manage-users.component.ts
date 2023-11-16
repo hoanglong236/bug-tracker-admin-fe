@@ -11,7 +11,7 @@ import { PaginatorComponent } from 'src/app/shared/components/paginator/paginato
   styleUrls: ['./manage-users.component.scss'],
 })
 export class ManageUsersComponent implements AfterViewInit {
-  @ViewChild('paginator') private paginator!: PaginatorComponent;
+  @ViewChild(PaginatorComponent) private paginator!: PaginatorComponent;
 
   protected users: UserResponseDTO[] = [];
   protected totalUsers: number = 0;

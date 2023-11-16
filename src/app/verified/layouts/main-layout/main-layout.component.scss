@@ -1,0 +1,13 @@
+.layout-container {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  height: auto !important;
+  transform: none;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+  display: block;
+  overflow: hidden;
+}

@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 
 import { VerifiedRoutingModule } from './verified-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { VerifiedLayoutComponent } from './layout/verified-layout/verified-layout.component';
-import { SidebarComponent } from './layout/sidebar/sidebar.component';
-import { HeaderComponent } from './layout/header/header.component';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { HeaderNavComponent } from './layouts/header-nav/header-nav.component';
+import { SidenavContentComponent } from './layouts/sidenav-content/sidenav-content.component';
 
 @NgModule({
-  declarations: [VerifiedLayoutComponent, SidebarComponent, HeaderComponent],
+  declarations: [
+    MainLayoutComponent,
+    HeaderNavComponent,
+    SidenavContentComponent,
+  ],
   imports: [VerifiedRoutingModule, SharedModule],
 })
 export class VerifiedModule {}

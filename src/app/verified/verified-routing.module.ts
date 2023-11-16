@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { VerifiedLayoutComponent } from './layout/verified-layout/verified-layout.component';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: VerifiedLayoutComponent,
+    component: MainLayoutComponent,
     children: [
       {
         path: 'users',

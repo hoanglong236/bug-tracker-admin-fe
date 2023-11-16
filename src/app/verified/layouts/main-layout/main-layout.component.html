@@ -1,0 +1,19 @@
+<layout-header-nav [targetToggleId]="'sidenav-toggle'" (toggleEvent)="toggleSideBar()"
+  class="w-full fixed top-0 z-10"></layout-header-nav>
+
+<div class="layout-container">
+  <div id="layout-backdrop"
+    class="block absolute top-0 left-0 right-0 bottom-0 w-full h-full z-[5] invisible transition-none opacity-20 bg-black"
+    (click)="toggleSideBar()"></div>
+
+  <aside id="sidenav-toggle" tabindex="-1"
+    class="z-[5] fixed top-0 left-0 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+    aria-label="Sidebar">
+
+    <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+      <layout-sidenav-content></layout-sidenav-content>
+    </div>
+  </aside>
+
+  <router-outlet></router-outlet>
+</div>

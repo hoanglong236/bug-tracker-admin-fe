@@ -11,6 +11,11 @@ export class MainLayoutComponent {
       .querySelector('#sidenav-toggle')
       ?.classList.toggle('-translate-x-full');
 
-    document.querySelector('#layout-backdrop')?.classList.toggle('invisible');
+    document.querySelector('#sidenav-overlay')?.classList.toggle('invisible');
+  };
+
+  protected onSidenavOverlayMouseUp = (e: MouseEvent) => {
+    e.stopPropagation();
+    this.toggleSideBar();
   };
 }

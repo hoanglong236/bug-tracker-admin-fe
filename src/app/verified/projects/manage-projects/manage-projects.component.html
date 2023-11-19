@@ -11,12 +11,12 @@
 
     <div class="mt-4 flex items-center gap-x-3">
       <button
-        class="px-4 py-2 flex items-center justify-center w-1/2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-gray-200 dark:border-gray-700">
+        class="px-4 py-2 flex items-center w-1/2 text-sm tracking-wide rounded-lg gap-x-2 sm:w-auto text-gray-800 border border-gray-200 hover:bg-gray-100">
         <span class="material-symbols-outlined">cloud_upload</span>
         <span>Import</span>
       </button>
       <a routerLink="./create"
-        class="px-4 py-2 flex items-center justify-center w-1/2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+        class="px-4 py-2 flex items-center w-1/2 text-sm tracking-wide rounded-lg gap-x-2 sm:w-auto text-gray-50 bg-blue-500 hover:bg-blue-600">
         <span class="material-symbols-outlined">add</span>
         <span>Add project</span>
       </a>
@@ -24,8 +24,7 @@
   </div>
   <projects-filter-form></projects-filter-form>
 
-  <div
-    class="mt-8 grid grid-flow-row auto-rows-fr gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 text-neutral-600">
+  <div class="mt-8 grid grid-flow-row auto-rows-fr gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     <project-card *ngFor="let project of projects;" [project]="project"
       (deleteProjectEvent)="deleteProject($event)"></project-card>
   </div>

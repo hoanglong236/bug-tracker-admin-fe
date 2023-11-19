@@ -8,7 +8,6 @@ import { PageModel } from 'src/app/core/models';
 })
 export class PaginatorComponent {
   @Input() pageModel: PageModel = new PageModel();
-
   @Output() goToXPageEvent = new EventEmitter<PageModel>();
 
   protected onPreviousBtnClick = () => {

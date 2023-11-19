@@ -10,7 +10,6 @@ import { DateTimeUtilService } from 'src/app/core/services/utils/date-time-util.
 })
 export class UsersTableComponent {
   @Input() users: UserResponseDTO[] = [];
-
   @Output() deleteUserEvent = new EventEmitter<number>();
 
   constructor(

@@ -2,3 +2,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .danger-btn {
+    @apply p-2 rounded text-center text-gray-50 bg-danger hover:bg-rose-700 hover:shadow;
+  }
+
+  .success-btn {
+    @apply p-2 rounded text-center text-gray-50 bg-success hover:bg-green-600 hover:shadow;
+  }
+
+  .primary-btn {
+    @apply p-2 rounded text-center text-gray-50 bg-primary hover:bg-blue-700 hover:shadow;
+  }
+}

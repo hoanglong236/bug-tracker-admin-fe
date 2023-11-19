@@ -10,11 +10,10 @@ export class MainLayoutComponent {
     document
       .querySelector('#sidenav-toggle')
       ?.classList.toggle('-translate-x-full');
-
     document.querySelector('#sidenav-overlay')?.classList.toggle('invisible');
   };
 
-  protected onSidenavOverlayMouseUp = (e: MouseEvent) => {
+  protected onSidenavOverlayMouseDown = (e: MouseEvent) => {
     e.stopPropagation();
     this.toggleSideBar();
   };

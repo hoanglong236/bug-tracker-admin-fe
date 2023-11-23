@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { HttpInterceptorProviders } from './core/interceptors';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +14,7 @@ import { HttpInterceptorProviders } from './core/interceptors';
     AppRoutingModule,
     CoreModule,
   ],
-  providers: [HttpInterceptorProviders],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

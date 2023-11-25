@@ -10,11 +10,11 @@
     </div>
 
     <div class="mt-4 flex items-center gap-x-3">
-      <button class="small-btn hover:text-primary">
+      <button class="small-btn">
         <span class="material-symbols-outlined mr-1">cloud_upload</span>
         <span>Import</span>
       </button>
-      <button class="small-btn hover:text-primary">
+      <button class="small-btn">
         <span class="material-symbols-outlined mr-1">add</span>
         <span>Add user</span>
       </button>
@@ -32,5 +32,5 @@
     </div>
   </div>
 
-  <shared-paginator (goToXPageEvent)="goToXPage($event)"></shared-paginator>
+  <paginator-component (goToXPageEvent)="goToXPage($event)"></paginator-component>
 </section>

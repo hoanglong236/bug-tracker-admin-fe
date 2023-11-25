@@ -10,24 +10,21 @@
     </div>
 
     <div class="mt-4 flex items-center gap-x-3">
-      <button
-        class="px-4 py-2 flex items-center w-1/2 text-sm tracking-wide rounded-lg gap-x-2 sm:w-auto text-gray-800 border border-gray-200 hover:bg-gray-100">
-        <span class="material-symbols-outlined">cloud_upload</span>
+      <button class="small-btn">
+        <span class="material-symbols-outlined mr-1">cloud_upload</span>
         <span>Import</span>
       </button>
-      <a routerLink="./create"
-        class="px-4 py-2 flex items-center w-1/2 text-sm tracking-wide rounded-lg gap-x-2 sm:w-auto text-gray-50 bg-blue-500 hover:bg-blue-600">
-        <span class="material-symbols-outlined">add</span>
+      <a routerLink="./create" class="small-btn">
+        <span class="material-symbols-outlined mr-1">add</span>
         <span>Add project</span>
       </a>
     </div>
   </div>
-  <projects-filter-form></projects-filter-form>
 
   <div class="mt-8 grid grid-flow-row auto-rows-fr gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     <project-card *ngFor="let project of projects;" [project]="project"
       (deleteProjectEvent)="deleteProject($event)"></project-card>
   </div>
 
-  <shared-paginator (goToXPageEvent)="goToXPage($event)"></shared-paginator>
+  <paginator-component (goToXPageEvent)="goToXPage($event)"></paginator-component>
 </section>

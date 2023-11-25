@@ -1,16 +1,34 @@
-<div class="mt-6 md:flex items-center justify-between">
+<form [formGroup]="filterForm" (submit)="onSubmit()">
   <div
-    class="inline-flex overflow-hidden divide-x rounded-lg font-medium text-xs sm:text-sm text-gray-600 dark:text-gray-300 bg-white border dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700">
-    <button class="px-5 py-2 transition-colors duration-200 bg-gray-100  dark:bg-gray-800">
-      View all
-    </button>
-    <button class="px-5 py-2 transition-colors duration-200 dark:hover:bg-gray-800 hover:bg-gray-100">
-      Monitored
-    </button>
-    <button class="px-5 py-2 transition-colors duration-200 dark:hover:bg-gray-800 hover:bg-gray-100">
-      Unmonitored
-    </button>
+    class="mt-5 p-4 flex items-center justify-between gap-2 bg-opacity-50 bg-gray-50 border border-gray-200 rounded-lg">
+    <div class="text-sm text-gray-800 flex flex-wrap gap-2">
+      <div>
+        <span>Name/Email:</span>
+        <input type="text" class="filter-input" formControlName="nameOrEmail">
+      </div>
+      <div>
+        <span>Status:</span>
+        <select name="" id="" class="filter-input cursor-pointer" formControlName="enableStatus">
+          <option value="all">All</option>
+          <option value="enabled">Enabled</option>
+          <option value="disabled">Disabled</option>
+        </select>
+      </div>
+      <div>
+        <span>Sort:</span>
+        <select name="" id="" class="filter-input cursor-pointer" formControlName="sortBy">
+          <option value="id-desc">ID - ASC</option>
+          <option value="">ID - DESC</option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="small-btn hover:text-primary">
+        <span class="material-symbols-outlined">
+          search
+        </span>
+        <span class="ml-1">Search</span>
+      </button>
+    </div>
   </div>
-
-  <shared-search-bar></shared-search-bar>
-</div>
+</form>

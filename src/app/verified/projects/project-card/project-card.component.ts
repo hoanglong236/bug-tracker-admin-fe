@@ -7,8 +7,7 @@ import { ProjectResponseDTO } from 'src/app/core/dto';
   styleUrls: ['./project-card.component.scss'],
 })
 export class ProjectCardComponent {
-  @Input({ required: true }) project!: ProjectResponseDTO;
-
+  @Input() project!: ProjectResponseDTO;
   @Output() deleteProjectEvent = new EventEmitter<number>();
 
   protected deleteProject = () => {

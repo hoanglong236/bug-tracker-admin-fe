@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageModel } from 'src/app/core/models';
 
 @Component({
-  selector: 'shared-paginator',
+  selector: 'paginator-component',
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss'],
 })

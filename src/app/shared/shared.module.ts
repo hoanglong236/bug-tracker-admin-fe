@@ -1,19 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PaginatorComponent } from './components/paginator/paginator.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { OverlayComponent } from './components/overlay/overlay.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
-const exportComponents = [
-  PaginatorComponent,
-  SearchBarComponent,
-  OverlayComponent,
-];
+const exportComponents = [OverlayComponent, PaginatorComponent];
 
 @NgModule({
-  declarations: [PaginatorComponent, SearchBarComponent, OverlayComponent],
+  declarations: [OverlayComponent, PaginatorComponent],
   imports: [CommonModule],
   exports: [
     CommonModule,

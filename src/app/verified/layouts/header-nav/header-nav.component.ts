@@ -1,6 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { OverlayComponent } from 'src/app/shared/components/overlay/overlay.component';
 
 @Component({
   selector: 'layout-header-nav',
@@ -10,6 +17,8 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 export class HeaderNavComponent {
   @Input() menuAriaControl: string = 'menuAriaControl';
   @Output() toggleMenuEvent = new EventEmitter();
+
+  @ViewChild(OverlayComponent) private overlay!: OverlayComponent;
 
   constructor(
     private readonly router: Router,
@@ -24,14 +33,7 @@ export class HeaderNavComponent {
     document
       .querySelector('#dropdown-user-profile')
       ?.classList.toggle('hidden');
-    document
-      .querySelector('#header-nav-overlay')
-      ?.classList.toggle('invisible');
-  };
-
-  protected onHeaderNavOverlayMouseDown = (e: MouseEvent) => {
-    e.stopPropagation();
-    this.toggleUserProfile();
+    this.overlay.toggleVisible();
   };
 
   protected signOut = (e: MouseEvent) => {

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { OverlayComponent } from 'src/app/shared/components/overlay/overlay.component';
 
 @Component({
   selector: 'verified-main-layout',
@@ -6,15 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-layout.component.scss'],
 })
 export class MainLayoutComponent {
+  @ViewChild(OverlayComponent) private overlay!: OverlayComponent;
+
   protected toggleSideBar = () => {
     document
       .querySelector('#sidenav-toggle')
       ?.classList.toggle('-translate-x-full');
-    document.querySelector('#sidenav-overlay')?.classList.toggle('invisible');
-  };
-
-  protected onSidenavOverlayMouseDown = (e: MouseEvent) => {
-    e.stopPropagation();
-    this.toggleSideBar();
+    this.overlay.toggleVisible();
   };
 }

@@ -4,15 +4,11 @@
 @tailwind utilities;
 
 @layer components {
-  .danger-btn {
-    @apply p-2 rounded text-center text-gray-50 bg-danger hover:bg-rose-700 hover:shadow;
+  .small-btn {
+    @apply px-3 py-2 flex items-center justify-center text-sm font-medium text-gray-800 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700;
   }
 
-  .success-btn {
-    @apply p-2 rounded text-center text-gray-50 bg-success hover:bg-green-600 hover:shadow;
-  }
-
-  .primary-btn {
-    @apply p-2 rounded text-center text-gray-50 bg-primary hover:bg-blue-700 hover:shadow;
+  .filter-input {
+    @apply mt-1 py-1.5 block text-sm w-full rounded-md border-0 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-gray-500;
   }
 }

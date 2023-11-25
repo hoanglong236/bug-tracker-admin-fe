@@ -2,12 +2,10 @@
   class="w-full fixed top-0 z-20"></layout-header-nav>
 
 <div class="layout-container">
-  <div id="sidenav-overlay" (mousedown)="onSidenavOverlayMouseDown($event)"
-    class="fixed inset-0 w-full h-screen z-10 invisible transition-none bg-opacity-10 bg-black"></div>
+  <overlay-component (touchEvent)="toggleSideBar()"></overlay-component>
 
-  <aside id="sidenav-toggle" tabindex="-1"
-    class="pt-20 fixed top-0 left-0 w-64 h-screen z-10 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
-    aria-label="Sidebar">
+  <aside id="sidenav-toggle" tabindex="-1" aria-label="Sidebar"
+    class="pt-20 fixed top-0 left-0 w-64 h-screen z-10 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700">
 
     <div class="px-3 pb-4 h-full overflow-y-auto bg-white dark:bg-gray-800">
       <layout-sidenav-content></layout-sidenav-content>

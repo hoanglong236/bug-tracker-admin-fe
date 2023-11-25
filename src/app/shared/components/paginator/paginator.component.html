@@ -1,24 +1,23 @@
 <div class="mt-6 sm:flex sm:items-center sm:justify-between">
-  <div class="text-sm text-gray-500 dark:text-gray-400">
+  <div class="text-sm text-gray-600 dark:text-gray-400">
     <span>Page </span>
-    <span class="font-medium text-gray-700 dark:text-gray-100">
+    <span class="font-medium text-gray-800 dark:text-gray-200">
       {{ pageModel.pageNumber + 1 }} of {{ pageModel.totalPages }}
     </span>
   </div>
 
-  <div class="mt-4 sm:mt-0 flex items-center gap-x-4 text-sm text-gray-700">
+  <div class="mt-4 sm:mt-0 flex items-center gap-x-4">
     <button (click)="onPreviousBtnClick()" [disabled]="pageModel.isFirstPage()"
-      class="px-5 py-2 flex items-center justify-center w-1/2 transition-colors duration-200 bg-white border rounded-md sm:w-auto gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800"
+      class="small-btn enabled:hover:text-primary"
       [ngClass]="{'opacity-50 cursor-not-allowed': pageModel.isFirstPage()}">
       <span class="material-symbols-outlined">skip_previous</span>
-      <span>Previous</span>
+      <span class="ml-1 leading-6">Previous</span>
     </button>
 
-    <button (click)="onNextBtnClick()" [disabled]="pageModel.isLastPage()"
-      class="px-5 py-2 flex items-center justify-center w-1/2 transition-colors duration-200 bg-white border rounded-md sm:w-auto gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800"
+    <button (click)="onNextBtnClick()" [disabled]="pageModel.isLastPage()" class="small-btn enabled:hover:text-primary"
       [ngClass]="{'opacity-50 cursor-not-allowed': pageModel.isLastPage()}">
-      <span>Next</span>
-      <span class="material-symbols-outlined">skip_next</span>
+      <span class="leading-6">Next</span>
+      <span class="ml-1 material-symbols-outlined">skip_next</span>
     </button>
   </div>
 </div>

@@ -1,56 +1,56 @@
-<table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-  <thead class="bg-gray-50 dark:bg-gray-800">
+<table class="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
+  <thead class="bg-gray-100 dark:bg-gray-900">
     <tr>
-      <th scope="col" class="px-4 py-3 text-sm font-medium text-left text-gray-800 dark:text-gray-400">
+      <th scope="col" class="px-4 py-2 text-sm font-medium text-left text-gray-800 dark:text-gray-400">
         ID</th>
-      <th scope="col" class="px-4 py-3 text-sm font-medium text-left text-gray-800 dark:text-gray-400">
+      <th scope="col" class="px-4 py-2 text-sm font-medium text-left text-gray-800 dark:text-gray-400">
         Email</th>
-      <th scope="col" class="px-4 py-3 text-sm font-medium text-left text-gray-800 dark:text-gray-400">
+      <th scope="col" class="px-4 py-2 text-sm font-medium text-left text-gray-800 dark:text-gray-400">
         Name</th>
-      <th scope="col" class="px-4 py-3 text-sm font-medium text-left text-gray-800 dark:text-gray-400">
+      <th scope="col" class="px-4 py-2 text-sm font-medium text-left text-gray-800 dark:text-gray-400">
         Role</th>
-      <th scope="col" class="px-4 py-3 text-sm font-medium text-left text-gray-800 dark:text-gray-400">
+      <th scope="col" class="px-4 py-2 text-sm font-medium text-left text-gray-800 dark:text-gray-400">
         Status</th>
-      <th scope="col" class="px-4 py-3 text-sm font-medium text-left text-gray-800 dark:text-gray-400">
+      <th scope="col" class="px-4 py-2 text-sm font-medium text-left text-gray-800 dark:text-gray-400">
         Created At</th>
-      <th scope="col" class="px-4 py-3 text-sm font-medium text-left text-gray-800 dark:text-gray-400">
+      <th scope="col" class="px-4 py-2 text-sm font-medium text-left text-gray-800 dark:text-gray-400">
         Updated At</th>
-      <th scope="col" class="px-4 py-3 text-sm font-medium text-left text-gray-800 dark:text-gray-400">
+      <th scope="col" class="px-4 py-2 text-sm font-medium text-left text-gray-800 dark:text-gray-400">
         Action</th>
     </tr>
   </thead>
   <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
     <tr *ngFor="let user of users">
-      <td class="p-4 text-sm whitespace-nowrap">
+      <td class="px-4 py-3 text-sm whitespace-nowrap">
         <h3 class="font-normal text-gray-800 dark:text-white">{{ user.id }}</h3>
       </td>
-      <td class="p-4 text-sm whitespace-nowrap">
+      <td class="px-4 py-3 text-sm whitespace-nowrap">
         <h3 class="font-normal text-gray-800 dark:text-white">{{ user.email }}</h3>
       </td>
-      <td class="p-4 text-sm whitespace-nowrap">
+      <td class="px-4 py-3 text-sm whitespace-nowrap">
         <h3 class="font-normal text-gray-800 dark:text-white">{{ user.name }}</h3>
       </td>
-      <td class="p-4 text-sm whitespace-nowrap">
+      <td class="px-4 py-3 text-sm whitespace-nowrap">
         <h3 class="font-normal text-gray-800 dark:text-white">{{ user.role }}</h3>
       </td>
-      <td class="p-4 text-sm whitespace-nowrap">
-        <ng-container *ngIf="user.enableFlag; then disableBtnBlock; else enableBtnBlock"></ng-container>
-        <ng-template #disableBtnBlock>
-          <button (click)="disableUser(user.id)"
-            class="p-2 rounded text-gray-100 bg-disable hover:bg-gray-600 hover:shadow w-16">Disable</button>
-        </ng-template>
-        <ng-template #enableBtnBlock>
-          <button (click)="enableUser(user.id)" class="success-btn w-16">Enable</button>
-        </ng-template>
+      <td class="px-4 py-3 text-sm whitespace-nowrap">
+        <h3 class="font-normal text-gray-800 dark:text-white">{{ user.enableFlag ? 'Enabled' : 'Disabled' }}</h3>
       </td>
-      <td class="p-4 text-sm whitespace-nowrap">
+      <td class="px-4 py-3 text-sm whitespace-nowrap">
         <h3 class="font-normal text-gray-800 dark:text-white">{{ user.createdAt }}</h3>
       </td>
-      <td class="p-4 text-sm whitespace-nowrap">
+      <td class="px-4 py-3 text-sm whitespace-nowrap">
         <h3 class="font-normal text-gray-800 dark:text-white">{{ user.updatedAt }}</h3>
       </td>
-      <td class="p-4 text-sm whitespace-nowrap">
-        <button (click)="deleteUser(user.id)" class="danger-btn w-16">Delete</button>
+      <td class="px-4 py-3 text-sm whitespace-nowrap flex items-center gap-2">
+        <ng-container *ngIf="user.enableFlag; then disableBtnBlock; else enableBtnBlock"></ng-container>
+        <ng-template #disableBtnBlock>
+          <button (click)="disableUser(user.id)" class="small-btn text-disable w-16">Disable</button>
+        </ng-template>
+        <ng-template #enableBtnBlock>
+          <button (click)="enableUser(user.id)" class="small-btn text-success w-16">Enable</button>
+        </ng-template>
+        <button (click)="deleteUser(user.id)" class="small-btn text-danger w-16">Delete</button>
       </td>
     </tr>
   </tbody>

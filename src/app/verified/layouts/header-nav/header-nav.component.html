@@ -13,15 +13,14 @@
         </a>
       </div>
 
-      <div id="header-nav-overlay" (mousedown)="onHeaderNavOverlayMouseDown($event)"
-        class="fixed inset-0 w-full h-screen z-10 invisible transition-none bg-opacity-10 bg-black"></div>
+      <overlay-component (touchEvent)="toggleUserProfile()"></overlay-component>
 
       <div class="flex items-center relative">
         <div class="flex items-center ms-3">
           <div>
-            <button type="button" (click)="toggleUserProfile()"
-              class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-              aria-expanded="false" data-dropdown-toggle="dropdown-user">
+            <button type="button" (click)="toggleUserProfile()" aria-expanded="false"
+              aria-controls="dropdown-user-profile"
+              class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
               <span class="sr-only">Open user menu</span>
               <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
                 alt="user photo">

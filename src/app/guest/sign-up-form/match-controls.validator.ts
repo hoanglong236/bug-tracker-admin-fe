@@ -4,9 +4,9 @@ export const matchControlsValidator = (
   controlName: string,
   matchingControlName: string
 ) => {
-  return (abstractControl: AbstractControl) => {
-    const control = abstractControl.get(controlName);
-    const matchingControl = abstractControl.get(matchingControlName);
+  return (groupControl: AbstractControl) => {
+    const control = groupControl.get(controlName);
+    const matchingControl = groupControl.get(matchingControlName);
 
     if (!control || !matchingControl) {
       return { matchValidate: 'Controls not found.' };

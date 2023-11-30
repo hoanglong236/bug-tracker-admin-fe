@@ -8,17 +8,24 @@
       </div>
       <div>
         <span>Status:</span>
-        <select name="" id="" class="filter-input cursor-pointer" formControlName="enableStatus">
+        <select class="filter-input cursor-pointer" formControlName="status">
           <option value="all">All</option>
           <option value="enabled">Enabled</option>
           <option value="disabled">Disabled</option>
         </select>
       </div>
       <div>
-        <span>Sort:</span>
-        <select name="" id="" class="filter-input cursor-pointer" formControlName="sortBy">
-          <option value="id-desc">ID - ASC</option>
-          <option value="">ID - DESC</option>
+        <span>Sort field:</span>
+        <select class="filter-input cursor-pointer" formControlName="sortField">
+          <option value="id">ID</option>
+          <option value="updatedAt">Updated At</option>
+        </select>
+      </div>
+      <div>
+        <span>Sort order:</span>
+        <select class="filter-input cursor-pointer" formControlName="sortDescending">
+          <option [ngValue]="true">DESC</option>
+          <option [ngValue]="false">ASC</option>
         </select>
       </div>
     </div>

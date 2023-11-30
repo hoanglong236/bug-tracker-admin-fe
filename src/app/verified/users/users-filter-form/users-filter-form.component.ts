@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { inCollectionValidator } from 'src/app/shared/validators/in-collection.directive';
 
 @Component({
   selector: 'users-filter-form',
@@ -7,19 +8,41 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./users-filter-form.component.scss'],
 })
 export class UsersFilterFormComponent {
-  protected filterForm = this.formBuilder.group({
-    nameOrEmail: ['', [Validators.required]],
-    enableStatus: [
-      'all',
-      [Validators.required, Validators.pattern('all|enabled|disabled')],
-    ],
-    sortBy: ['', Validators.required],
-  });
-  protected firstTimeSubmit = true;
+  @Output() submitEvent = new EventEmitter<any>();
 
-  @Output() submitEvent = new EventEmitter();
+  protected filterForm = this.formBuilder.group({
+    nameOrEmail: [''],
+    status: [
+      'all',
+      [
+        Validators.required,
+        inCollectionValidator(['all', 'enabled', 'disabled']),
+      ],
+    ],
+    sortField: [
+      'id',
+      [Validators.required, inCollectionValidator(['id', 'updatedAt'])],
+    ],
+    sortDescending: [true, [Validators.required]],
+  });
 
   constructor(private readonly formBuilder: FormBuilder) {}
 
-  protected onSubmit = () => {};
+  protected onSubmit = () => {
+    if (this.filterForm.invalid) {
+      alert('Please enter valid search criteria!');
+      return;
+    }
+    this.submitEvent.emit(this.getSubmitEventData());
+  };
+
+  private getSubmitEventData = () => {
+    const formValue = this.filterForm.value;
+    return {
+      nameOrEmail: formValue.nameOrEmail,
+      status: formValue.status,
+      sortField: formValue.sortField,
+      sortDescending: formValue.sortDescending,
+    };
+  };
 }

@@ -14,7 +14,16 @@ export class ManageUsersComponent implements AfterViewInit {
   @ViewChild(PaginatorComponent) private paginator!: PaginatorComponent;
 
   protected users: UserResponseDTO[] = [];
-  protected totalUsers: number = 0;
+  protected totalUsers = 0;
+
+  private filterRequestDTO: FilterUsersRequestDTO = {
+    nameOrEmail: '',
+    status: 'all',
+    sortField: 'id',
+    sortDescending: true,
+    pageNumber: 0,
+    pageSize: 12,
+  };
 
   constructor(
     private readonly userService: UserService,
@@ -22,18 +31,27 @@ export class ManageUsersComponent implements AfterViewInit {
   ) {}
 
   ngAfterViewInit(): void {
-    this.filterUsers({ pageNumber: 0, pageSize: 12 });
+    this.filterUsers();
   }
 
   protected goToXPage = (pageModel: PageModel) => {
-    this.filterUsers({
+    const pageProps = {
       pageNumber: pageModel.pageNumber,
       pageSize: pageModel.pageSize,
-    });
+    };
+    this.filterRequestDTO = {
+      ...this.filterRequestDTO,
+      ...pageProps,
+    };
+    this.filterUsers();
   };
 
-  private filterUsers = (params: FilterUsersRequestDTO) => {
-    this.userService.filterUsers(params, this.onFilterUsersSuccess, () => {});
+  private filterUsers = () => {
+    this.userService.filterUsers(
+      this.filterRequestDTO,
+      this.onFilterUsersSuccess,
+      () => {}
+    );
   };
 
   private onFilterUsersSuccess = (value: any) => {
@@ -46,7 +64,6 @@ export class ManageUsersComponent implements AfterViewInit {
     this.users = value.content.map((user: UserResponseDTO) =>
       this.dateTimeUtil.formatDateTimeProps(user)
     );
-
     this.totalUsers = value.totalElements;
   };
 
@@ -67,14 +84,24 @@ export class ManageUsersComponent implements AfterViewInit {
     ) {
       pageModel = pageModel.getPreviousPage();
     }
-
-    this.filterUsers({
-      pageNumber: pageModel.pageNumber,
-      pageSize: pageModel.pageSize,
-    });
+    this.goToXPage(pageModel);
   };
 
   private onDeleteUserError = (err: any) => {
     alert(err.error.message);
+  };
+
+  protected onFilterUsersFormSubmit = (data: any) => {
+    let filterProps = {};
+    if (data) {
+      filterProps = {
+        nameOrEmail: data.nameOrEmail,
+        status: data.status,
+        sortField: data.sortField,
+        sortDescending: data.sortDescending,
+      };
+    }
+    this.filterRequestDTO = { ...this.filterRequestDTO, ...filterProps };
+    this.filterUsers();
   };
 }

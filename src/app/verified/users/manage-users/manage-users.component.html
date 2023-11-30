@@ -20,7 +20,7 @@
       </button>
     </div>
   </div>
-  <users-filter-form></users-filter-form>
+  <users-filter-form (submitEvent)="onFilterUsersFormSubmit($event)"></users-filter-form>
 
   <div class="mt-6 flex flex-col">
     <div class="overflow-x-auto">

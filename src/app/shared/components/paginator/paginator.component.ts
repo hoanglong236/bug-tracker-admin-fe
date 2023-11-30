@@ -7,7 +7,7 @@ import { PageModel } from 'src/app/core/models';
   styleUrls: ['./paginator.component.scss'],
 })
 export class PaginatorComponent {
-  @Input() pageModel: PageModel = new PageModel();
+  @Input() pageModel = new PageModel();
   @Output() goToXPageEvent = new EventEmitter<PageModel>();
 
   protected onPreviousBtnClick = () => {

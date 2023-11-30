@@ -1,10 +1,3 @@
-export * from './sign-in-request.dto';
-export * from './sign-up-request.dto';
-
-export * from './filter-users-request.dto';
-export * from './user-response.dto';
-
-export * from './filter-projects-request.dto';
-export * from './project-request.dto';
-export * from './project-response.dto';
-export * from './member-response.dto';
+export * from './auth.dto';
+export * from './user.dto';
+export * from './project.dto';

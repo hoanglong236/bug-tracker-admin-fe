@@ -15,7 +15,7 @@ import { OverlayComponent } from 'src/app/shared/components/overlay/overlay.comp
   styleUrls: ['./header-nav.component.scss'],
 })
 export class HeaderNavComponent {
-  @Input() menuAriaControl: string = 'menuAriaControl';
+  @Input() menuAriaControl = 'menuAriaControl';
   @Output() toggleMenuEvent = new EventEmitter();
 
   @ViewChild(OverlayComponent) private overlay!: OverlayComponent;

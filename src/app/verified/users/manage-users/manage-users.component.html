@@ -26,11 +26,12 @@
     <div class="overflow-x-auto">
       <div class="py-2 inline-block min-w-full align-middle">
         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-          <users-table [users]="users" (deleteUserEvent)="deleteUser($event)"></users-table>
+          <users-table [users]="users" (enableUserEvent)="enableUser($event)" (disableUserEvent)="disableUser($event)"
+            (deleteUserEvent)="deleteUser($event)"></users-table>
         </div>
       </div>
     </div>
   </div>
 
-  <paginator-component (goToXPageEvent)="goToXPage($event)"></paginator-component>
+  <paginator-component (changePageNumberEvent)="goToXPage($event)"></paginator-component>
 </section>

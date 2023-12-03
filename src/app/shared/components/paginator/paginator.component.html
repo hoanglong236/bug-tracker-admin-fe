@@ -7,15 +7,15 @@
   </div>
 
   <div class="mt-4 sm:mt-0 flex items-center gap-x-4">
-    <button (click)="onPreviousBtnClick()" [disabled]="pageModel.isFirstPage()"
+    <button (click)="onPreviousBtnClick()" [disabled]="isDisablePreviousBtn()"
       class="small-btn enabled:hover:text-primary"
-      [ngClass]="{'opacity-50 cursor-not-allowed': pageModel.isFirstPage()}">
+      [ngClass]="{'opacity-50 cursor-not-allowed': isDisablePreviousBtn()}">
       <span class="material-symbols-outlined">skip_previous</span>
       <span class="ml-1 leading-6">Previous</span>
     </button>
 
-    <button (click)="onNextBtnClick()" [disabled]="pageModel.isLastPage()" class="small-btn enabled:hover:text-primary"
-      [ngClass]="{'opacity-50 cursor-not-allowed': pageModel.isLastPage()}">
+    <button (click)="onNextBtnClick()" [disabled]="isDisableNextBtn()" class="small-btn enabled:hover:text-primary"
+      [ngClass]="{'opacity-50 cursor-not-allowed': isDisableNextBtn()}">
       <span class="leading-6">Next</span>
       <span class="ml-1 material-symbols-outlined">skip_next</span>
     </button>

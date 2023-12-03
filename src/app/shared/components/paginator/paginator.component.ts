@@ -8,17 +8,25 @@ import { PageModel } from 'src/app/core/models';
 })
 export class PaginatorComponent {
   @Input() pageModel = new PageModel();
-  @Output() goToXPageEvent = new EventEmitter<PageModel>();
+  @Output() changePageNumberEvent = new EventEmitter<number>();
+
+  protected isDisablePreviousBtn = () => {
+    return this.pageModel.isOutOfRange() || this.pageModel.isFirstPage();
+  };
 
   protected onPreviousBtnClick = () => {
-    if (!this.pageModel.isFirstPage()) {
-      this.goToXPageEvent.emit(this.pageModel.getPreviousPage());
+    if (!this.isDisablePreviousBtn()) {
+      this.changePageNumberEvent.emit(this.pageModel.previousPageNumber());
     }
   };
 
+  protected isDisableNextBtn = () => {
+    return this.pageModel.isOutOfRange() || this.pageModel.isLastPage();
+  };
+
   protected onNextBtnClick = () => {
-    if (!this.pageModel.isLastPage()) {
-      this.goToXPageEvent.emit(this.pageModel.getNextPage());
+    if (!this.isDisableNextBtn()) {
+      this.changePageNumberEvent.emit(this.pageModel.nextPageNumber());
     }
   };
 }

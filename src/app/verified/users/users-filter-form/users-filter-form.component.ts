@@ -11,7 +11,7 @@ export class UsersFilterFormComponent {
   @Output() submitEvent = new EventEmitter<any>();
 
   protected filterForm = this.formBuilder.group({
-    nameOrEmail: [''],
+    nameOrEmailPattern: [''],
     status: [
       'all',
       [
@@ -21,7 +21,7 @@ export class UsersFilterFormComponent {
     ],
     sortField: [
       'id',
-      [Validators.required, inCollectionValidator(['id', 'updatedAt'])],
+      [Validators.required, inCollectionValidator(['id', 'updated_at'])],
     ],
     sortDescending: [true, [Validators.required]],
   });
@@ -38,11 +38,24 @@ export class UsersFilterFormComponent {
 
   private getSubmitEventData = () => {
     const formValue = this.filterForm.value;
-    return {
-      nameOrEmail: formValue.nameOrEmail,
-      status: formValue.status,
-      sortField: formValue.sortField,
-      sortDescending: formValue.sortDescending,
-    };
+    const submitEventData: any = {};
+
+    submitEventData.nameOrEmailPattern = null;
+    if (formValue.nameOrEmailPattern) {
+      const pattern = formValue.nameOrEmailPattern.trim();
+      if (pattern.length) {
+        submitEventData.nameOrEmailPattern = pattern;
+      }
+    }
+    submitEventData.status = null;
+    if (formValue.status === 'enabled') {
+      submitEventData.status = true;
+    } else if (formValue.status === 'disabled') {
+      submitEventData.status = false;
+    }
+    submitEventData.sortField = formValue.sortField ?? 'id';
+    submitEventData.sortDescending = formValue.sortDescending ?? true;
+
+    return submitEventData;
   };
 }

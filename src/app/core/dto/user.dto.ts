@@ -1,6 +1,6 @@
 export type FilterUsersRequestDTO = {
-  nameOrEmail: string;
-  status: string;
+  nameOrEmailPattern: string | null;
+  status: boolean | null;
   sortField: string;
   sortDescending: boolean;
   pageNumber: number;

@@ -16,13 +16,16 @@ export class ManageUsersComponent implements AfterViewInit {
   protected users: UserResponseDTO[] = [];
   protected totalUsers = 0;
 
-  private filterRequestDTO: FilterUsersRequestDTO = {
-    nameOrEmail: '',
-    status: 'all',
+  private readonly defaultFilterRequestDTO: FilterUsersRequestDTO = {
+    nameOrEmailPattern: null,
+    status: null,
     sortField: 'id',
     sortDescending: true,
-    pageNumber: 0,
-    pageSize: 12,
+    pageNumber: PageModel.FIRST_PAGE,
+    pageSize: 2,
+  };
+  private filterRequestDTO: FilterUsersRequestDTO = {
+    ...this.defaultFilterRequestDTO,
   };
 
   constructor(
@@ -34,15 +37,17 @@ export class ManageUsersComponent implements AfterViewInit {
     this.filterUsers();
   }
 
-  protected goToXPage = (pageModel: PageModel) => {
-    const pageProps = {
-      pageNumber: pageModel.pageNumber,
-      pageSize: pageModel.pageSize,
-    };
-    this.filterRequestDTO = {
-      ...this.filterRequestDTO,
-      ...pageProps,
-    };
+  protected onFilterUsersFormSubmit = (data: any) => {
+    this.filterRequestDTO.pageNumber = PageModel.FIRST_PAGE;
+    if (data) {
+      const props = {
+        nameOrEmailPattern: data.nameOrEmailPattern,
+        status: data.status,
+        sortField: data.sortField,
+        sortDescending: data.sortDescending,
+      };
+      this.filterRequestDTO = { ...this.filterRequestDTO, ...props };
+    }
     this.filterUsers();
   };
 
@@ -50,58 +55,53 @@ export class ManageUsersComponent implements AfterViewInit {
     this.userService.filterUsers(
       this.filterRequestDTO,
       this.onFilterUsersSuccess,
-      () => {}
+      (err: any) => alert(err.error.message)
     );
   };
 
   private onFilterUsersSuccess = (value: any) => {
-    this.paginator.pageModel = new PageModel(
-      value.number,
-      value.totalPages,
-      value.size
-    );
-
+    const pageModel = new PageModel(value.number, value.totalPages, value.size);
+    this.paginator.pageModel = pageModel;
     this.users = value.content.map((user: UserResponseDTO) =>
       this.dateTimeUtil.formatDateTimeProps(user)
     );
     this.totalUsers = value.totalElements;
   };
 
+  protected enableUser = (userId: number) => {
+    this.userService.enableUser(userId, this.onUpdateUserSuccess, (err: any) =>
+      alert(err.error.message)
+    );
+  };
+
+  protected disableUser = (userId: number) => {
+    this.userService.disableUser(userId, this.onUpdateUserSuccess, (err: any) =>
+      alert(err.error.message)
+    );
+  };
+
+  private onUpdateUserSuccess = () => {
+    this.goToXPage(PageModel.FIRST_PAGE);
+  };
+
   protected deleteUser = (userId: number) => {
-    this.userService.deleteUser(
-      userId,
-      this.onDeleteUserSuccess,
-      this.onDeleteUserError
+    this.userService.deleteUser(userId, this.onDeleteUserSuccess, (err: any) =>
+      alert(err.error.message)
     );
   };
 
   private onDeleteUserSuccess = () => {
-    let pageModel = { ...this.paginator.pageModel };
-    if (
-      !pageModel.isFirstPage() &&
-      pageModel.isLastPage() &&
-      this.users.length === 1
-    ) {
-      pageModel = pageModel.getPreviousPage();
+    const pageModel = this.paginator.pageModel;
+    const numberUsersAfterDeleteSuccess = this.users.length - 1;
+    if (pageModel.isFirstPage()) {
+      this.filterUsers();
+    } else if (pageModel.isLastPage() || numberUsersAfterDeleteSuccess === 0) {
+      this.goToXPage(pageModel.previousPageNumber());
     }
-    this.goToXPage(pageModel);
   };
 
-  private onDeleteUserError = (err: any) => {
-    alert(err.error.message);
-  };
-
-  protected onFilterUsersFormSubmit = (data: any) => {
-    let filterProps = {};
-    if (data) {
-      filterProps = {
-        nameOrEmail: data.nameOrEmail,
-        status: data.status,
-        sortField: data.sortField,
-        sortDescending: data.sortDescending,
-      };
-    }
-    this.filterRequestDTO = { ...this.filterRequestDTO, ...filterProps };
+  protected goToXPage = (pageNumber: number) => {
+    this.filterRequestDTO.pageNumber = pageNumber;
     this.filterUsers();
   };
 }

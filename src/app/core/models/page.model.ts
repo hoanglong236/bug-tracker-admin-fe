@@ -1,10 +1,12 @@
 export class PageModel {
-  pageNumber: number;
-  totalPages: number;
-  pageSize: number;
+  static readonly FIRST_PAGE = 0;
+
+  readonly pageNumber: number;
+  readonly totalPages: number;
+  readonly pageSize: number;
 
   constructor(
-    pageNumber: number = 0,
+    pageNumber: number = PageModel.FIRST_PAGE,
     totalPages: number = 0,
     pageSize: number = 0
   ) {
@@ -13,19 +15,30 @@ export class PageModel {
     this.pageSize = pageSize;
   }
 
+  lastPageNumber = () => {
+    return this.totalPages - 1;
+  };
+
+  previousPageNumber = () => {
+    return this.pageNumber - 1;
+  };
+
+  nextPageNumber = () => {
+    return this.pageNumber + 1;
+  };
+
+  isOutOfRange = () => {
+    return (
+      this.pageNumber < PageModel.FIRST_PAGE ||
+      this.pageNumber > this.lastPageNumber()
+    );
+  };
+
   isLastPage = () => {
-    return this.pageNumber === this.totalPages - 1 || this.totalPages === 0;
+    return this.totalPages === 0 || this.pageNumber === this.lastPageNumber();
   };
 
   isFirstPage = () => {
-    return this.pageNumber === 0;
-  };
-
-  getNextPage = () => {
-    return new PageModel(this.pageNumber + 1, this.totalPages, this.pageSize);
-  };
-
-  getPreviousPage = () => {
-    return new PageModel(this.pageNumber - 1, this.totalPages, this.pageSize);
+    return this.totalPages === 0 || this.pageNumber === PageModel.FIRST_PAGE;
   };
 }
